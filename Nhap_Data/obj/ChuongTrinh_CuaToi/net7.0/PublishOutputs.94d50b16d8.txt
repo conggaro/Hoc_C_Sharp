@@ -1,0 +1,5 @@
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\publish\Nhap_Data.exe
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\publish\Nhap_Data.dll
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\publish\Nhap_Data.deps.json
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\publish\Nhap_Data.runtimeconfig.json
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\publish\Nhap_Data.pdb

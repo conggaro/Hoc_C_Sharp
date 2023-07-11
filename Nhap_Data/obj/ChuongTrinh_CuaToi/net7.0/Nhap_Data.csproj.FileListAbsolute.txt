@@ -1,0 +1,15 @@
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\Nhap_Data.exe
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\Nhap_Data.deps.json
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\Nhap_Data.runtimeconfig.json
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\Nhap_Data.dll
+C:\Test code C#\Nhap_Data\bin\ChuongTrinh_CuaToi\net7.0\Nhap_Data.pdb
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.csproj.AssemblyReference.cache
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.AssemblyInfoInputs.cache
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.AssemblyInfo.cs
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.csproj.CoreCompileInputs.cache
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.dll
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\refint\Nhap_Data.dll
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.pdb
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\Nhap_Data.genruntimeconfig.cache
+C:\Test code C#\Nhap_Data\obj\ChuongTrinh_CuaToi\net7.0\ref\Nhap_Data.dll
