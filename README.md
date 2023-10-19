@@ -34,3 +34,8 @@ Bước 2: Tìm cái thư mục được xuất ra trong thư mục bin
 <br>
 
 --> Nếu chạy chương trình .dll thì gõ "dotnet tên_chương_trình.dll" mới được.
+
+# Truy vấn trong C#
+1. Lấy 1 bản ghi .FirstOrDefault()
+2. Lấy 1 bản ghi .DefaultIfEmpty()
+3. Còn .AsNoTracking() thì để không theo dõi, dể đóng 1 lần truy vấn, mục đích là để mở 1 truy vấn khác, không để nó lỗi.
