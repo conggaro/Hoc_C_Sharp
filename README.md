@@ -39,3 +39,7 @@ Bước 2: Tìm cái thư mục được xuất ra trong thư mục bin
 1. Lấy 1 bản ghi .FirstOrDefault()
 2. Lấy 1 bản ghi .DefaultIfEmpty()
 3. Còn .AsNoTracking() thì để không theo dõi, dể đóng 1 lần truy vấn, mục đích là để mở 1 truy vấn khác, không để nó lỗi.
+
+# Gọi stored procedure trong C#
+1. Gọi stored procedure (không có tham số truyền vào).
+2. Gọi stored procedure (có tham số truyền vào).
