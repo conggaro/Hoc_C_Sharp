@@ -15,7 +15,10 @@ namespace MyApp
 
 
             // in ra đối tượng thời gian
+            Console.WriteLine("Doi tuong thoi gian dt1:");
             Console.WriteLine(dt1.ToString("dd/MM/yyyy"));
+
+            Console.WriteLine("\nDoi tuong thoi gian dt2:");
             Console.WriteLine(dt2.ToString("dd/MM/yyyy"));
 
 
@@ -36,7 +39,7 @@ namespace MyApp
 
             // để lấy giá trị khoảng cách giữa
             // hai đối tượng thời gian theo đơn vị tương ứng
-            Console.WriteLine("Khoang cach giua dt1 va dt2 la: {0}", length.TotalDays);
+            Console.WriteLine("\nKhoang cach giua dt1 va dt2 la: {0} ngay", length.TotalDays);
         }
     }
 }
