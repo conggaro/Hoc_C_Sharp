@@ -43,3 +43,9 @@ Bước 2: Tìm cái thư mục được xuất ra trong thư mục bin
 # Gọi stored procedure trong C#
 1. Gọi stored procedure (không có tham số truyền vào).
 2. Gọi stored procedure (có tham số truyền vào).
+
+# Cách sử dụng toán tử null coalescing ??
+int? x = null;<br>
+Console.WriteLine(x);<br>
+x = x ?? 10;<br>
+Console.WriteLine(x);
