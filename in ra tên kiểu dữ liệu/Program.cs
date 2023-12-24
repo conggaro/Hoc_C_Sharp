@@ -63,8 +63,8 @@ namespace MyApp
             // Sử dụng GetType() để lấy kiểu dữ liệu và ToString() để chuyển thành chuỗi
             return variable.GetType().ToString();
 
-            // Hoặc sử dụng typeof() để lấy kiểu dữ liệu trực tiếp và ToString()
-            //return typeof(variable).ToString();
+            // Hoặc sử dụng .GetType().Name
+            // return variable.GetType().Name;
         }
 
         public enum MauSac
