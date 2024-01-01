@@ -51,3 +51,5 @@ x = x ?? 10;<br>
 Console.WriteLine(x);
 
 # Truy cập thuộc tính bằng indexer (Bộ đánh chỉ mục)
+Thay vì viết: đối_tượng.name = "Nguyen Van A";<br>
+Thì bây giờ viết là: đối_tượng["name"] = "Nguyen Van A";
