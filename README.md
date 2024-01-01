@@ -49,3 +49,5 @@ int? x = null;<br>
 Console.WriteLine(x);<br>
 x = x ?? 10;<br>
 Console.WriteLine(x);
+
+# Truy cập thuộc tính bằng indexer (Bộ đánh chỉ mục)
