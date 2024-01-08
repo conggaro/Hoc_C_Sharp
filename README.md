@@ -69,3 +69,10 @@ Ví dụ 2:<br>
 {
     &emsp;&emsp;&emsp;&emsp;return a + b + c;
 }</code>
+<br><br>
+Ví dụ 3:
+<code>dynamic dynamicData;
+dynamicData = 1;
+Console.WriteLine(dynamicData);
+dynamicData = "C Sharp";
+Console.WriteLine(dynamicData);</code>
