@@ -61,11 +61,11 @@ Thì bây giờ viết là:<br>
 Ví dụ 1:<br>
 <code>public static dynamic TinhTien(dynamic a, dynamic b)
 {
-    return a + b;
+    &emsp;&emsp;&emsp;&emsp;return a + b;
 }</code>
 <br><br>
 Ví dụ 2:<br>
 <code>public static dynamic TinhTien(dynamic a, dynamic b, dynamic c)
 {
-    return a + b + c;
+    &emsp;&emsp;&emsp;&emsp;return a + b + c;
 }</code>
