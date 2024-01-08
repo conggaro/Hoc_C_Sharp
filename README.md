@@ -58,11 +58,13 @@ Thì bây giờ viết là:<br>
 đối_tượng["name"] = "Nguyen Van A";
 
 # Sử dụng kiểu dữ liệu dynamic
+Ví dụ 1:<br>
 <code>public static dynamic TinhTien(dynamic a, dynamic b)
 {
     return a + b;
 }</code>
-<br>
+<br><br>
+Ví dụ 2:<br>
 <code>public static dynamic TinhTien(dynamic a, dynamic b, dynamic c)
 {
     return a + b + c;
