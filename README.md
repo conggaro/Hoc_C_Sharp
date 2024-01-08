@@ -70,7 +70,7 @@ Ví dụ 2:<br>
     &emsp;&emsp;&emsp;&emsp;return a + b + c;
 }</code>
 <br><br>
-Ví dụ 3:
+Ví dụ 3:<br>
 <code>dynamic dynamicData;
 dynamicData = 1;
 Console.WriteLine(dynamicData);
