@@ -80,8 +80,15 @@ Console.WriteLine(dynamicData);</code>
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
-Nhưng khác là môi hơi tròn, khi ói phải chu ra về phía trước.<br>
+Nhưng khác là môi hơi tròn, khi nói phải chu ra về phía trước.<br>
 Khi luồng khí thoát ra thì môi tròn nửa,<br>
 lưỡi thẳng và chạm vào hàm dưới,<br>
 để khí thoát ra ngoài trên bề mặt lưỡi<br>
-mà không ảnh hưởng đến dây thanh.<br>
+mà không ảnh hưởng đến dây thanh.<br><br>
+
+/dʒ/<br>
+Phát âm giống / t∫ / nhưng có rung dây thanh quản.<br>
+Cách đọc tương tự: Môi hơi tròn, chi về trước.<br>
+Khi khí phát ra, môi nửa tròn,<br>
+lưỡi thẳng,<br>
+chạm hàm dưới để luồng khí thoát ra trên bề mặt lưỡi.<br>
