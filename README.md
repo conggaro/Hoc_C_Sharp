@@ -76,3 +76,12 @@ dynamicData = 1;
 Console.WriteLine(dynamicData);
 dynamicData = "C Sharp";
 Console.WriteLine(dynamicData);</code>
+
+# Kiến thức tiếng Anh
+/t∫/<br>
+Cách đọc tương tự âm CH.<br>
+Nhưng khác là môi hơi tròn, khi ói phải chu ra về phía trước.<br>
+Khi luồng khí thoát ra thì môi tròn nửa,<br>
+lưỡi thẳng và chạm vào hàm dưới,<br>
+để khí thoát ra ngoài trên bề mặt lưỡi<br>
+mà không ảnh hưởng đến dây thanh.<br>
