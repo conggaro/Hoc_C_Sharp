@@ -78,24 +78,9 @@ dynamicData = "C Sharp";
 Console.WriteLine(dynamicData);</code>
 
 # In chữ tiếng Việt có dấu ra ngoài Console của Command Prompt
-<code>
-using System;
-using System.Text;
-
-namespace MyApp
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            Console.InputEncoding = Encoding.Unicode;
-            Console.OutputEncoding = Encoding.Unicode;
-
-            Console.WriteLine("Nguyễn Văn A");
-        }
-    }
-}
-</code>
+<code>Console.InputEncoding = Encoding.Unicode;
+Console.OutputEncoding = Encoding.Unicode;
+Console.WriteLine("Nguyễn Văn A");</code>
 
 # Kiến thức tiếng Anh
 /t∫/<br>
