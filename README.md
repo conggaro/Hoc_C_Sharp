@@ -86,6 +86,10 @@ Console.WriteLine("Nguyễn Văn A");</code>
 Ví dụ: cho lớp Person<br>
 <code>Person? p = JsonSerializer.Deserialize<Person>(content);</code>
 
+# Chuyển Object sang JSON
+Ví dụ: cho lớp Person<br>
+<code>string p_str = JsonSerializer.Serialize<Person>(p);</code>
+
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
