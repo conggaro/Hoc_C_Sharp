@@ -83,7 +83,7 @@ Console.OutputEncoding = Encoding.Unicode;
 Console.WriteLine("Nguyễn Văn A");</code>
 
 # Chuyển JSON sang Object
-Ví dụ: cho lớp Person
+Ví dụ: cho lớp Person<br>
 <code>Person? p = JsonSerializer.Deserialize<Person>(content);</code>
 
 # Kiến thức tiếng Anh
