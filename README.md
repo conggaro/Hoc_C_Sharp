@@ -82,6 +82,10 @@ Console.WriteLine(dynamicData);</code>
 Console.OutputEncoding = Encoding.Unicode;
 Console.WriteLine("Nguyễn Văn A");</code>
 
+# Chuyển JSON sang Object
+Ví dụ: cho lớp Person
+<code>Person? p = JsonSerializer.Deserialize<Person>(content);</code>
+
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
