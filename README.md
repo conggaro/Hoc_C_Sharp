@@ -91,11 +91,11 @@ Ví dụ: cho lớp Person<br>
 <code>string p_str = JsonSerializer.Serialize<Person>(p);</code>
 
 # Chuyển giờ trong máy tính sang định dạng AM PM
-Bước 1: Mở Control Panel
-Bước 2: Bấm vào Region
-Bước 3: Bấm vào Additional Setting...
-Bước 4: Bấm vào tab Time ở bên trên của hộp thoại Customize Format
-Bước 5: cái drop down list "AM Symbol" thì chọn AM
+Bước 1: Mở Control Panel<br>
+Bước 2: Bấm vào Region<br>
+Bước 3: Bấm vào Additional Setting...<br>
+Bước 4: Bấm vào tab Time ở bên trên của hộp thoại Customize Format<br>
+Bước 5: cái drop down list "AM Symbol" thì chọn AM<br>
 Bước 6: cái drop down list "BM Symbol" thì chọn BM
 
 # Kiến thức tiếng Anh
