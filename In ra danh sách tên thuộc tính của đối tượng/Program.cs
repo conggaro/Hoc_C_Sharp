@@ -33,7 +33,6 @@ namespace MyApp
             // của đối tượng
             foreach (var item in dt.GetType().GetProperties())
             {
-                
                 Console.WriteLine(item.Name);
             }
         }
