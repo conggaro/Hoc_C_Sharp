@@ -98,6 +98,9 @@ Bước 4: Bấm vào tab Time ở bên trên của hộp thoại Customize Form
 Bước 5: cái drop down list "AM Symbol" thì chọn AM<br>
 Bước 6: cái drop down list "BM Symbol" thì chọn BM
 
+# Thêm thuộc tính, phương thức cho đối tượng sau khi khởi tạo
+Sử dụng lớp ExpandoObject ở trong namespace System.Dynamic
+
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
