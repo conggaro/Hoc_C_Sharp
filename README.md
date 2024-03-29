@@ -111,11 +111,11 @@ int z = 7;
 Console.WriteLine($"{x} + {y} = {z}");</code>
 
 # Truyền tham số điều kiện là string cho phương thức Where()
-Cách 1:
+Cách 1:<br>
 <code>string condition = "x => x.Length > 5";
 var result = words.AsQueryable().Where(condition);</code>
 
-Cách 2:
+Cách 2:<br>
 <code>var result2 = words.AsQueryable().Where("x => x.Length > @0", 5);</code>
 
 # Kiến thức tiếng Anh
