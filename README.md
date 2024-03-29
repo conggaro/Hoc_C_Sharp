@@ -104,7 +104,7 @@ Sử dụng lớp ExpandoObject ở trong namespace System.Dynamic
 # Kỹ năng dùng tham số để in ra Console
 <code>Console.WriteLine("{0} + {1} = {2}", 1, 5, 6);</code>
 
-<br><br>
+<br>
 <code>int x = 1;
 int y = 6;
 int z = 7;
