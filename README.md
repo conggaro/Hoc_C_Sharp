@@ -101,6 +101,9 @@ Bước 6: cái drop down list "BM Symbol" thì chọn BM
 # Thêm thuộc tính, phương thức cho đối tượng sau khi khởi tạo
 Sử dụng lớp ExpandoObject ở trong namespace System.Dynamic
 
+# Kỹ năng dùng tham số để in ra Console
+<code>Console.WriteLine("{0} + {1} = {2}", 1, 5, 6);</code>
+
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
