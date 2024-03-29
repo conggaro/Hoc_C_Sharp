@@ -102,7 +102,9 @@ Bước 6: cái drop down list "BM Symbol" thì chọn BM
 Sử dụng lớp ExpandoObject ở trong namespace System.Dynamic
 
 # Kỹ năng dùng tham số để in ra Console
-<code>Console.WriteLine("{0} + {1} = {2}", 1, 5, 6);</code><br>
+<code>Console.WriteLine("{0} + {1} = {2}", 1, 5, 6);</code>
+
+<br><br>
 <code>int x = 1;
 int y = 6;
 int z = 7;
