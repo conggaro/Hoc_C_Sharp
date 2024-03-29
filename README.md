@@ -110,6 +110,9 @@ int y = 6;
 int z = 7;
 Console.WriteLine($"{x} + {y} = {z}");</code>
 
+# Truyền tham số điều kiện là string cho phương thức Where
+<code>var result2 = words.AsQueryable().Where("x => x.Length > @0", 5);</code>
+
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
