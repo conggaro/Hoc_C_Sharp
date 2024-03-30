@@ -122,7 +122,7 @@ Cách 2:<br>
 <code>/// &lt;summary&gt;<br>
 /// lớp ModelOrg dùng để làm khuôn mẫu<br>
 /// cho các bản ghi<br>
-/// &lt;summary&gt;</code>
+/// &lt;/summary&gt;</code>
 
 # Kiến thức tiếng Anh
 /t∫/<br>
