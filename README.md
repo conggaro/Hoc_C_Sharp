@@ -118,6 +118,12 @@ var result = words.AsQueryable().Where(condition);</code>
 Cách 2:<br>
 <code>var result2 = words.AsQueryable().Where("x => x.Length > @0", 5);</code>
 
+# Viết mô tả cho lớp, thuộc tính, phương thức
+<code>/// <summary>
+/// lớp ModelOrg dùng để làm khuôn mẫu
+/// cho các bản ghi
+/// </summary></code>
+
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
