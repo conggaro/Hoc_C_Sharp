@@ -8,12 +8,21 @@ namespace MyApp
     {
         public static void Main(string[] args)
         {
-            // dòng này để in ra màn hình console tiếng Việt có dấu
+            #region thiết lập tiếng Việt
+            
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
+            
+            #endregion
 
+
+
+            // tạo danh sách
             List<ModelOrg> models = new List<ModelOrg>();
 
+
+
+            #region kết nối cơ sở dữ liệu
 
             // chuỗi kết nối
             string connectionString = @"
@@ -92,13 +101,13 @@ namespace MyApp
             // giải phóng tài nguyên "SqlConnection"
             connection.Dispose();
 
+            #endregion
+
 
 
             #region Xử lý dữ liệu
             
-            List<ModelOrg> records = models;
-            
-            OrgTree orgTree = new OrgTree(records);
+            OrgTree orgTree = new OrgTree(models);
             
             TreeNode root = orgTree.GetRoot();
             
