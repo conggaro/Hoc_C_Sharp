@@ -119,10 +119,10 @@ Cách 2:<br>
 <code>var result2 = words.AsQueryable().Where("x => x.Length > @0", 5);</code>
 
 # Viết mô tả cho lớp, thuộc tính, phương thức
-<code>/// &lt;summary&gt;</code><br>
+<code>/// &lt;summary&gt;<br>
 /// lớp ModelOrg dùng để làm khuôn mẫu<br>
 /// cho các bản ghi<br>
-/// </summary>
+/// &lt;summary&gt;</code>
 
 # Kiến thức tiếng Anh
 /t∫/<br>
