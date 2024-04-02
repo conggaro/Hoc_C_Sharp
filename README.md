@@ -133,6 +133,9 @@ lưỡi thẳng và chạm vào hàm dưới,<br>
 để khí thoát ra ngoài trên bề mặt lưỡi<br>
 mà không ảnh hưởng đến dây thanh.<br><br>
 
+# Làm việc với lớp DateTime
+lớp DateTime có hỗ trợ toán tử <code><=</code>
+
 /dʒ/<br>
 Phát âm giống / t∫ / nhưng có rung dây thanh quản.<br>
 Cách đọc tương tự: Môi hơi tròn, chi về trước.<br>
