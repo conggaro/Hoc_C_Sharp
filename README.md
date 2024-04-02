@@ -124,6 +124,9 @@ Cách 2:<br>
 /// cho các bản ghi<br>
 /// &lt;/summary&gt;</code>
 
+# Làm việc với lớp DateTime
+lớp DateTime có hỗ trợ toán tử <code><=</code>
+
 # Kiến thức tiếng Anh
 /t∫/<br>
 Cách đọc tương tự âm CH.<br>
@@ -132,9 +135,6 @@ Khi luồng khí thoát ra thì môi tròn nửa,<br>
 lưỡi thẳng và chạm vào hàm dưới,<br>
 để khí thoát ra ngoài trên bề mặt lưỡi<br>
 mà không ảnh hưởng đến dây thanh.<br><br>
-
-# Làm việc với lớp DateTime
-lớp DateTime có hỗ trợ toán tử <code><=</code>
 
 /dʒ/<br>
 Phát âm giống / t∫ / nhưng có rung dây thanh quản.<br>
