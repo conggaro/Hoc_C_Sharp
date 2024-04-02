@@ -125,7 +125,8 @@ Cách 2:<br>
 /// &lt;/summary&gt;</code>
 
 # Làm việc với lớp DateTime
-lớp DateTime có hỗ trợ toán tử <code><=</code>
+lớp DateTime có hỗ trợ toán tử <code><=</code><br>
+Nếu bạn muốn tạo đối tượng DateTime là 31/01/2004 00:00 AM
 
 # Kiến thức tiếng Anh
 /t∫/<br>
