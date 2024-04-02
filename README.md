@@ -126,7 +126,9 @@ Cách 2:<br>
 
 # Làm việc với lớp DateTime
 lớp DateTime có hỗ trợ toán tử <code><=</code><br>
-Nếu bạn muốn tạo đối tượng DateTime là 31/01/2004 00:00 AM
+Nếu bạn muốn tạo đối tượng DateTime là 31/01/2004 00:00 AM<br>
+Cách 1: DateTime dt = new DateTime(2004, 1, 31, 0, 0, 0);<br>
+Cách 2: Sử dụng thuộc tính Date của đối tượng DateTime luôn, đỡ phải tạo đối tượng
 
 # Kiến thức tiếng Anh
 /t∫/<br>
