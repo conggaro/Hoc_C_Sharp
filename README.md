@@ -131,11 +131,14 @@ Cách 1: DateTime dt = new DateTime(2004, 1, 31, 0, 0, 0);<br>
 Cách 2: Sử dụng thuộc tính Date của đối tượng DateTime luôn, đỡ phải tạo đối tượng
 
 # Làm việc với hàm VLOOKUP trong Excel
-VLOOKUP(tham_số_1; tham_số_2; tham_số_3; tham_số_4)<br>
-tham số 1: ô excel bạn chọn<br>
+VLOOKUP(tham_số_1; tham_số_2; tham_số_3; tham_số_4)<br><br>
+tham số 1: ô excel bạn chọn để đem đi so sánh với vùng sẽ select<br>
 tham số 2: vùng dữ liệu mà bạn select<br>
 tham số 3: cột ở trong vùng select (thường được điền là 1, 2, 3 tương ứng với cột A, cột B hoặc cột C)<br>
-tham số 4: tìm tương đối thì điền 0, tìm đúng tuyệt đối thì điền 1
+tham số 4: tìm tương đối thì điền 0, tìm đúng tuyệt đối thì điền 1<br>
+
+<br>chỗ điền tham số 2 thì bạn nên để dấu đô la vào, vì dấu đô la là địa chỉ tuyệt đối không đổi<br>
+ví dụ: VLOOKUP(A1; $D$6:$E$8; 2; FALSE)
 
 # Kiến thức tiếng Anh
 /t∫/<br>
