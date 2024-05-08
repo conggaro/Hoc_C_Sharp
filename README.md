@@ -130,6 +130,11 @@ Nếu bạn muốn tạo đối tượng DateTime là 31/01/2004 00:00 AM<br>
 Cách 1: DateTime dt = new DateTime(2004, 1, 31, 0, 0, 0);<br>
 Cách 2: Sử dụng thuộc tính Date của đối tượng DateTime luôn, đỡ phải tạo đối tượng
 
+# Định dạng số
+<pre>decimal x = 123;
+string str = string.Format("{0:000000}", x);
+Console.WriteLine(str);</pre>
+
 # Làm việc với hàm VLOOKUP trong Excel
 VLOOKUP(tham_số_1; tham_số_2; tham_số_3; tham_số_4)<br><br>
 tham số 1: ô excel bạn chọn để đem đi so sánh với vùng sẽ select<br>
