@@ -30,10 +30,11 @@ namespace MyApp
 
                     if (nameProperty == "Name")
                     {
-                        property.SetValue(person, "Nguyen Van A");
-
                         // thiết lập giá trị mới
                         // cho thuộc tính
+                        property.SetValue(person, "Nguyen Van A");
+
+                        // gán lại
                         valueProperty = property.GetValue(person);
                     }
 
