@@ -36,6 +36,12 @@ namespace MyApp
             string Name = "Name is null";
             if (y != null) Name = y.ToString();
 
+
+            // phương thức SetValue()
+            // có kiểu trả về là void
+            // person.GetType().GetProperty("Id")!.SetValue(person, 999);
+
+            
             Console.WriteLine(Id);
             Console.WriteLine(Name);
             Console.WriteLine(person);
