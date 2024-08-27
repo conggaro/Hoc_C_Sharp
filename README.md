@@ -151,6 +151,7 @@ Console.WriteLine(str);</pre>
 
     return builder.ToString();
 }</pre>
+Đầu vào: "Nguyễn Văn Ánh", đầu ra: "Nguyen Van Anh"
 
 # Làm việc với hàm VLOOKUP trong Excel
 VLOOKUP(tham_số_1; tham_số_2; tham_số_3; tham_số_4)<br><br>
