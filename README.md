@@ -136,7 +136,7 @@ string str = string.Format("{0:000000}", x);
 Console.WriteLine(str);</pre>
 
 # Hàm xóa hết dấu
-<pre>private static string RemoveDiacritics(string input)
+<pre>public static string RemoveDiacritics(string input)
 {
     string normalized = input.Normalize(NormalizationForm.FormD);
     StringBuilder builder = new StringBuilder();
