@@ -135,6 +135,23 @@ Cách 2: Sử dụng thuộc tính Date của đối tượng DateTime luôn, đ
 string str = string.Format("{0:000000}", x);
 Console.WriteLine(str);</pre>
 
+# Hàm xóa hết dấu
+<pre>private static string RemoveDiacritics(string input)
+{
+    string normalized = input.Normalize(NormalizationForm.FormD);
+    StringBuilder builder = new StringBuilder();
+
+    foreach (char c in normalized)
+    {
+        if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+        {
+            builder.Append(c);
+        }
+    }
+
+    return builder.ToString();
+}</pre>
+
 # Làm việc với hàm VLOOKUP trong Excel
 VLOOKUP(tham_số_1; tham_số_2; tham_số_3; tham_số_4)<br><br>
 tham số 1: ô excel bạn chọn để đem đi so sánh với vùng sẽ select<br>
