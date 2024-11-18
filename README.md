@@ -178,3 +178,6 @@ Cách đọc tương tự: Môi hơi tròn, chi về trước.<br>
 Khi khí phát ra, môi nửa tròn,<br>
 lưỡi thẳng,<br>
 chạm hàm dưới để luồng khí thoát ra trên bề mặt lưỡi.<br>
+
+# COM reference là gì?
+Component Object Model reference
