@@ -181,3 +181,39 @@ chạm hàm dưới để luồng khí thoát ra trên bề mặt lưỡi.<br>
 
 # COM reference là gì?
 Component Object Model reference
+
+# Mẫu
+<pre>public async Task ProcessDataAsync()
+{
+    using (var transaction = await _dbContext.Database.BeginTransactionAsync())
+    {
+        try
+        {
+            // Thêm bản ghi vào bảng A
+            var entityA = new TableA { Name = "Test A", CreatedAt = DateTime.Now };
+            _dbContext.TableAs.Add(entityA);
+            await _dbContext.SaveChangesAsync();
+
+            // Thêm bản ghi vào bảng B
+            var entityB = new TableB { Name = "Test B", TableAId = entityA.Id };
+            _dbContext.TableBs.Add(entityB);
+            await _dbContext.SaveChangesAsync();
+
+            // Lưu giao dịch nếu tất cả thành công
+            await transaction.CommitAsync();
+            Console.WriteLine("Transaction committed successfully.");
+        }
+        catch (Exception ex)
+        {
+            // Hủy giao dịch nếu có lỗi xảy ra
+            await transaction.RollbackAsync();
+            Console.WriteLine($"Transaction rolled back due to error: {ex.Message}");
+        }
+    }
+}
+</pre>
+
+<pre>BeginTransactionAsync(): Bắt đầu giao dịch.
+CommitAsync(): Lưu giao dịch nếu không có lỗi.
+RollbackAsync(): Hủy giao dịch nếu xảy ra lỗi.
+SaveChangesAsync(): Thực hiện các thay đổi đối với cơ sở dữ liệu.</pre>
