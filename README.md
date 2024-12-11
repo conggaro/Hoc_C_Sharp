@@ -182,7 +182,7 @@ chạm hàm dưới để luồng khí thoát ra trên bề mặt lưỡi.<br>
 # COM reference là gì?
 Component Object Model reference
 
-# Mẫu
+# Mẫu BeginTransactionAsync
 <pre>public async Task ProcessDataAsync()
 {
     using (var transaction = await _dbContext.Database.BeginTransactionAsync())
@@ -217,3 +217,6 @@ Component Object Model reference
 CommitAsync(): Lưu giao dịch nếu không có lỗi.
 RollbackAsync(): Hủy giao dịch nếu xảy ra lỗi.
 SaveChangesAsync(): Thực hiện các thay đổi đối với cơ sở dữ liệu.</pre>
+
+<pre>transaction đảm bảo tính toàn vẹn dữ liệu.
+using tự động giải phóng tài nguyên liên quan đến giao dịch.</pre>
