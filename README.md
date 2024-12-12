@@ -1,3 +1,10 @@
+# Cách quay lại code cũ trong Visual Studio 2022
+1. Mở View All Commits (ấn giữ Ctrl + 0 + Y)
+2. Chuột phải vào commit mà bạn muốn revert (quay lại)
+3. Chọn Revert, Chọn Yes
+4. Nếu code xung đột với nhau, thì chuột phải vào commit đó tiếp
+5. Chọn Reset, chọn Delete Changes
+
 # Bắt đầu tạo project .NET console
 Bước 1: Tạo thư mục
 (Đặt tên không có dấu tiếng Việt, không có dấu cách)
