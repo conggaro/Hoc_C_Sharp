@@ -227,3 +227,6 @@ SaveChangesAsync(): Thực hiện các thay đổi đối với cơ sở dữ li
 
 <pre>transaction đảm bảo tính toàn vẹn dữ liệu.
 using tự động giải phóng tài nguyên liên quan đến giao dịch.</pre>
+
+# 1 To 00001
+<pre>string value = String.Format("{0:D5}", 1);</pre>
