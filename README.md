@@ -230,3 +230,12 @@ using tự động giải phóng tài nguyên liên quan đến giao dịch.</pr
 
 # 1 To 00001
 <pre>string value = String.Format("{0:D5}", 1);</pre>
+
+# Thêm tháng, giảm tháng
+<pre>// Khởi tạo một đối tượng DateTime
+        DateTime currentDate = DateTime.Now;
+        Console.WriteLine("Ngày hiện tại: " + currentDate);
+
+        // Trừ 1 tháng
+        DateTime previousMonth = currentDate.AddMonths(-1);
+        Console.WriteLine("Ngày sau khi trừ 1 tháng: " + previousMonth);</pre>
