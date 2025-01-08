@@ -239,3 +239,49 @@ using tự động giải phóng tài nguyên liên quan đến giao dịch.</pr
         // Trừ 1 tháng
         DateTime previousMonth = currentDate.AddMonths(-1);
         Console.WriteLine("Ngày sau khi trừ 1 tháng: " + previousMonth);</pre>
+
+# Chuyển chữ gạch chân _ sang định dạng camelCase
+<pre>using System;
+using System.Globalization;
+
+class Program
+{
+    static void Main()
+    {
+        string[] inputs = 
+        {
+            "WD_BHXH_SALARY_DIFFERENCE",
+            "WD_BHYT_SALARY_DIFFERENCE",
+            "WD_BHTN_SALARY_DIFFERENCE",
+            "WD_BHTNLD_BNN_SALARY_DIFFERENCE"
+        };
+
+        foreach (var input in inputs)
+        {
+            string camelCase = ConvertToCamelCase(input);
+            Console.WriteLine(camelCase);
+        }
+    }
+
+    static string ConvertToCamelCase(string input)
+    {
+        // Tách chuỗi bằng dấu gạch dưới
+        var parts = input.Split('_');
+
+        // Chuyển đổi từng phần
+        for (int i = 0; i < parts.Length; i++)
+        {
+            if (i == 0)
+            {
+                parts[i] = parts[i].ToLower(); // Phần đầu tiên viết thường
+            }
+            else
+            {
+                parts[i] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(parts[i].ToLower()); // Các phần còn lại viết hoa ký tự đầu
+            }
+        }
+
+        // Ghép lại thành chuỗi
+        return string.Join("", parts);
+    }
+}</pre>
