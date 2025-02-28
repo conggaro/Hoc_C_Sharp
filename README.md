@@ -285,3 +285,18 @@ class Program
         return string.Join("", parts);
     }
 }</pre>
+
+# Cách fix server khi publish bị lỗi, lỗi vì lệch phiên bản
+<pre>Dùng lệnh sau đây để kiểm tra trên 2 máy là server và máy build hiện tại
+dotnet --list-runtimes
+
+sau đó kiểm tra file API.runtimeconfig.json
+xem có khớp với phiên bản runtime trên server không
+
+nếu lệch thì Chỉnh sửa file .csproj để dùng đúng phiên bản
+<PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RuntimeFrameworkVersion>9.0.2</RuntimeFrameworkVersion>
+</PropertyGroup>
+
+build lại rồi kiểm tra file API.runtimeconfig.json</pre>
