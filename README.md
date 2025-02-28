@@ -294,9 +294,9 @@ sau đó kiểm tra file API.runtimeconfig.json
 xem có khớp với phiên bản runtime trên server không
 
 nếu lệch thì Chỉnh sửa file .csproj để dùng đúng phiên bản
-<PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <RuntimeFrameworkVersion>9.0.2</RuntimeFrameworkVersion>
-</PropertyGroup>
+&ltPropertyGroup>
+    &ltTargetFramework>net9.0&lt/TargetFramework>
+    &ltRuntimeFrameworkVersion>9.0.2&lt/RuntimeFrameworkVersion>
+&lt/PropertyGroup>
 
 build lại rồi kiểm tra file API.runtimeconfig.json</pre>
