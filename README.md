@@ -286,6 +286,28 @@ class Program
     }
 }</pre>
 
+# Kiểm tra bị NULL hoặc bị khoảng trắng
+<pre>using System;
+
+public class Example
+{
+   public static void Main()
+   {
+      string[] values = { null, String.Empty, "ABCDE", 
+                          new String(' ', 20), "  \t   ", 
+                          new String('\u2000', 10) };
+      foreach (string value in values)
+         Console.WriteLine(String.IsNullOrWhiteSpace(value));
+   }
+}
+// The example displays the following output:
+//       True
+//       True
+//       False
+//       True
+//       True
+//       True</pre>
+
 # Cách fix server khi publish bị lỗi, lỗi vì lệch phiên bản
 <pre>Dùng lệnh sau đây để kiểm tra trên 2 máy là server và máy build hiện tại
 dotnet --list-runtimes
