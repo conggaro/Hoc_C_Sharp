@@ -1,3 +1,6 @@
+# Cách xem Console.WriteLine() trong dự án WEB API (IDE là Visual Studio 2022)
+View => Output => Chọn API - ASP.NET Core Web Server
+
 # Cách quay lại code cũ trong Visual Studio 2022
 1. Mở View All Commits (ấn giữ Ctrl + 0 + Y)
 2. Chuột phải vào commit mà bạn muốn revert (quay lại)
