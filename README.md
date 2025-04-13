@@ -325,3 +325,9 @@ nếu lệch thì Chỉnh sửa file .csproj để dùng đúng phiên bản
 &lt/PropertyGroup>
 
 build lại rồi kiểm tra file API.runtimeconfig.json</pre>
+
+# Hàm trả về số lượng ngày trong tháng
+<pre>int year = 2024;
+int month = 2;
+int days = DateTime.DaysInMonth(year, month);
+Console.WriteLine($"Số ngày trong tháng {month}/{year} là: {days}"); // Kết quả: 29</pre>
