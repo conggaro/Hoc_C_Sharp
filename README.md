@@ -368,3 +368,6 @@ Console.WriteLine(indexDate3.DayOfYear); // 166</pre>
         ModelChange = o.MODEL_CHANGE,
         IsRead = o.IS_READ
     }).ToListAsync();</pre>
+
+# BCrypt.Net.BCrypt.HashPassword
+Hash passwords in ASP.NET Core
