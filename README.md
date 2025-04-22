@@ -334,13 +334,13 @@ Console.WriteLine($"Số ngày trong tháng {month}/{year} là: {days}"); // K�
 
 # Lấy ra số thứ tự của một ngày bất kỳ trong năm
 <pre>DateTime indexDate1 = new DateTime(2025, 12, 31);
-      DateTime indexDate2 = new DateTime(2025, 1, 1);
-      DateTime indexDate3 = new DateTime(2025, 6, 15);
+DateTime indexDate2 = new DateTime(2025, 1, 1);
+DateTime indexDate3 = new DateTime(2025, 6, 15);
 
-      Console.WriteLine(indexDate1.ToString("dd/MM/yyyy")); // 31/12/2025
-      Console.WriteLine(indexDate2.ToString("dd/MM/yyyy")); // 01/01/2025
-      Console.WriteLine(indexDate3.ToString("dd/MM/yyyy")); // 15/06/2025
+Console.WriteLine(indexDate1.ToString("dd/MM/yyyy")); // 31/12/2025
+Console.WriteLine(indexDate2.ToString("dd/MM/yyyy")); // 01/01/2025
+Console.WriteLine(indexDate3.ToString("dd/MM/yyyy")); // 15/06/2025
 
-      Console.WriteLine(indexDate1.DayOfYear); // 365
-      Console.WriteLine(indexDate2.DayOfYear); // 1
-      Console.WriteLine(indexDate3.DayOfYear); // 166</pre>
+Console.WriteLine(indexDate1.DayOfYear); // 365
+Console.WriteLine(indexDate2.DayOfYear); // 1
+Console.WriteLine(indexDate3.DayOfYear); // 166</pre>
