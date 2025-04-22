@@ -344,3 +344,27 @@ Console.WriteLine(indexDate3.ToString("dd/MM/yyyy")); // 15/06/2025
 Console.WriteLine(indexDate1.DayOfYear); // 365
 Console.WriteLine(indexDate2.DayOfYear); // 1
 Console.WriteLine(indexDate3.DayOfYear); // 166</pre>
+
+# Nếu viết code liên quan đến lấy ra số lượng bản ghi thông báo thì nên tham khảo code này
+<pre>var list = await (from o in _dbContext.AtNotifications
+    from c in _dbContext.HuEmployees.Where(x => x.ID == o.EMP_CREATE_ID).DefaultIfEmpty()
+    from cv in _dbContext.HuEmployeeCvs.Where(x => x.ID == c.PROFILE_ID).DefaultIfEmpty()
+    where o.EMP_NOTIFY_ID!.Contains(employeeId.ToString())
+            && o.ACTION == action
+            && ((DateTime.UtcNow.DayOfYear - o.CREATED_DATE!.Value.DayOfYear) <= 30)
+            && o.CREATED_DATE!.Value.Year == DateTime.UtcNow.Year
+                  orderby (o.UPDATED_DATE ?? o.CREATED_DATE) descending
+    select new
+    {
+        Id = o.ID,
+        CreatedDate = o.CREATED_DATE,
+        UpdatedDate = o.UPDATED_DATE,
+        Name = c.CODE + " - " + cv.FULL_NAME,
+        Action = o.ACTION,
+        Type = o.TYPE,
+        RefId = o.REF_ID,
+        StatusNotify = o.STATUS_NOTIFY,
+        Title = o.TITLE,
+        ModelChange = o.MODEL_CHANGE,
+        IsRead = o.IS_READ
+    }).ToListAsync();</pre>
