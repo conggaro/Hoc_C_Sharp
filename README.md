@@ -371,3 +371,285 @@ Console.WriteLine(indexDate3.DayOfYear); // 166</pre>
 
 # BCrypt.Net.BCrypt.HashPassword
 Hash passwords in ASP.NET Core
+
+# Ánh xạ kiểu dữ liệu trong Entity Framework
+<div class="modal-card modal-card-full fill-mobile" id="expand-table-modal">
+		<div class="modal-card-head padding-xxs buttons buttons-right margin-bottom-none">
+			<div><!----> <button data-autofocus="" class="modal-close button button-clear button-sm margin-bottom-none display-flex gap-xxs">
+		<span class="icon" aria-hidden="true">
+			<span class="docon docon-collapse color-primary"></span>
+		</span>
+		<span><!---->Collapse table<!----></span>
+	</button><!----></div>
+		</div>
+		<div class="modal-content margin-none margin-xs-tablet content"><!----><div class="has-inner-focus table-wrapper" tabindex="0" role="group" aria-label="Horizontally scrollable data"><table aria-label="Table 1" class="table table-sm margin-top-none">
+<thead>
+<tr>
+<th>SQL Server Database Engine type</th>
+<th>.NET Framework type</th>
+<th>SqlDbType enumeration</th>
+<th>SqlDataReader SqlTypes typed accessor</th>
+<th>DbType enumeration</th>
+<th>SqlDataReader DbType typed accessor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bigint</td>
+<td>Int64</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-bigint" class="no-loc" data-linktype="absolute-path">BigInt</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlint64" class="no-loc" data-linktype="absolute-path">GetSqlInt64</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-int64" class="no-loc" data-linktype="absolute-path">Int64</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getint64" class="no-loc" data-linktype="absolute-path">GetInt64</a></td>
+</tr>
+<tr>
+<td>binary</td>
+<td>Byte[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-varbinary" class="no-loc" data-linktype="absolute-path">VarBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlbinary" class="no-loc" data-linktype="absolute-path">GetSqlBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-binary" class="no-loc" data-linktype="absolute-path">Binary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getbytes" class="no-loc" data-linktype="absolute-path">GetBytes</a></td>
+</tr>
+<tr>
+<td>bit</td>
+<td>Boolean</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-bit" class="no-loc" data-linktype="absolute-path">Bit</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlboolean" class="no-loc" data-linktype="absolute-path">GetSqlBoolean</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-boolean" class="no-loc" data-linktype="absolute-path">Boolean</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getboolean" class="no-loc" data-linktype="absolute-path">GetBoolean</a></td>
+</tr>
+<tr>
+<td>char</td>
+<td>String<br><br> Char[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-char" class="no-loc" data-linktype="absolute-path">Char</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlstring" class="no-loc" data-linktype="absolute-path">GetSqlString</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-ansistringfixedlength" class="no-loc" data-linktype="absolute-path">AnsiStringFixedLength</a>,<br><br> <a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-string" class="no-loc" data-linktype="absolute-path">String</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getstring" class="no-loc" data-linktype="absolute-path">GetString</a><br><br> <a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getchars" class="no-loc" data-linktype="absolute-path">GetChars</a></td>
+</tr>
+<tr>
+<td>date <sup>1</sup><br><br> (SQL Server 2008 and later)</td>
+<td>DateTime</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-date" class="no-loc" data-linktype="absolute-path">Date</a> <sup>1</sup></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqldatetime" class="no-loc" data-linktype="absolute-path">GetSqlDateTime</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-date" class="no-loc" data-linktype="absolute-path">Date</a> <sup>1</sup></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdatetime" class="no-loc" data-linktype="absolute-path">GetDateTime</a></td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>DateTime</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-datetime" class="no-loc" data-linktype="absolute-path">DateTime</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqldatetime" class="no-loc" data-linktype="absolute-path">GetSqlDateTime</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-datetime" class="no-loc" data-linktype="absolute-path">DateTime</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdatetime" class="no-loc" data-linktype="absolute-path">GetDateTime</a></td>
+</tr>
+<tr>
+<td>datetime2<br><br> (SQL Server 2008 and later)</td>
+<td>DateTime</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-datetime2" class="no-loc" data-linktype="absolute-path">DateTime2</a></td>
+<td>None</td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-datetime2" class="no-loc" data-linktype="absolute-path">DateTime2</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdatetime" class="no-loc" data-linktype="absolute-path">GetDateTime</a></td>
+</tr>
+<tr>
+<td>datetimeoffset<br><br> (SQL Server 2008 and later)</td>
+<td>DateTimeOffset</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-datetimeoffset" class="no-loc" data-linktype="absolute-path">DateTimeOffset</a></td>
+<td>none</td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-datetimeoffset" class="no-loc" data-linktype="absolute-path">DateTimeOffset</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdatetimeoffset" class="no-loc" data-linktype="absolute-path">GetDateTimeOffset</a></td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>Decimal</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-decimal" class="no-loc" data-linktype="absolute-path">Decimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqldecimal" class="no-loc" data-linktype="absolute-path">GetSqlDecimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-decimal" class="no-loc" data-linktype="absolute-path">Decimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdecimal" class="no-loc" data-linktype="absolute-path">GetDecimal</a></td>
+</tr>
+<tr>
+<td>FILESTREAM attribute (varbinary(max))</td>
+<td>Byte[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-varbinary" class="no-loc" data-linktype="absolute-path">VarBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlbytes" class="no-loc" data-linktype="absolute-path">GetSqlBytes</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-binary" class="no-loc" data-linktype="absolute-path">Binary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getbytes" class="no-loc" data-linktype="absolute-path">GetBytes</a></td>
+</tr>
+<tr>
+<td>float</td>
+<td>Double</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-float" class="no-loc" data-linktype="absolute-path">Float</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqldouble" class="no-loc" data-linktype="absolute-path">GetSqlDouble</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-double" class="no-loc" data-linktype="absolute-path">Double</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdouble" class="no-loc" data-linktype="absolute-path">GetDouble</a></td>
+</tr>
+<tr>
+<td>image</td>
+<td>Byte[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-binary" class="no-loc" data-linktype="absolute-path">Binary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlbinary" class="no-loc" data-linktype="absolute-path">GetSqlBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-binary" class="no-loc" data-linktype="absolute-path">Binary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getbytes" class="no-loc" data-linktype="absolute-path">GetBytes</a></td>
+</tr>
+<tr>
+<td>int</td>
+<td>Int32</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-int" class="no-loc" data-linktype="absolute-path">Int</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlint32" class="no-loc" data-linktype="absolute-path">GetSqlInt32</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-int32" class="no-loc" data-linktype="absolute-path">Int32</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getint32" class="no-loc" data-linktype="absolute-path">GetInt32</a></td>
+</tr>
+<tr>
+<td>money</td>
+<td>Decimal</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-money" class="no-loc" data-linktype="absolute-path">Money</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlmoney" class="no-loc" data-linktype="absolute-path">GetSqlMoney</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-decimal" class="no-loc" data-linktype="absolute-path">Decimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdecimal" class="no-loc" data-linktype="absolute-path">GetDecimal</a></td>
+</tr>
+<tr>
+<td>nchar</td>
+<td>String<br><br> Char[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-nchar" class="no-loc" data-linktype="absolute-path">NChar</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlstring" class="no-loc" data-linktype="absolute-path">GetSqlString</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-stringfixedlength" class="no-loc" data-linktype="absolute-path">StringFixedLength</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getstring" class="no-loc" data-linktype="absolute-path">GetString</a><br><br> <a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getchars" class="no-loc" data-linktype="absolute-path">GetChars</a></td>
+</tr>
+<tr>
+<td>ntext</td>
+<td>String<br><br> Char[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-ntext" class="no-loc" data-linktype="absolute-path">NText</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlstring" class="no-loc" data-linktype="absolute-path">GetSqlString</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-string" class="no-loc" data-linktype="absolute-path">String</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getstring" class="no-loc" data-linktype="absolute-path">GetString</a><br><br> <a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getchars" class="no-loc" data-linktype="absolute-path">GetChars</a></td>
+</tr>
+<tr>
+<td>numeric</td>
+<td>Decimal</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-decimal" class="no-loc" data-linktype="absolute-path">Decimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqldecimal" class="no-loc" data-linktype="absolute-path">GetSqlDecimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-decimal" class="no-loc" data-linktype="absolute-path">Decimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdecimal" class="no-loc" data-linktype="absolute-path">GetDecimal</a></td>
+</tr>
+<tr>
+<td>nvarchar</td>
+<td>String<br><br> Char[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-nvarchar" class="no-loc" data-linktype="absolute-path">NVarChar</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlstring" class="no-loc" data-linktype="absolute-path">GetSqlString</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-string" class="no-loc" data-linktype="absolute-path">String</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getstring" class="no-loc" data-linktype="absolute-path">GetString</a><br><br> <a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getchars" class="no-loc" data-linktype="absolute-path">GetChars</a></td>
+</tr>
+<tr>
+<td>real</td>
+<td>Single</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-real" class="no-loc" data-linktype="absolute-path">Real</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlsingle" class="no-loc" data-linktype="absolute-path">GetSqlSingle</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-single" class="no-loc" data-linktype="absolute-path">Single</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getfloat" class="no-loc" data-linktype="absolute-path">GetFloat</a></td>
+</tr>
+<tr>
+<td>rowversion</td>
+<td>Byte[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-timestamp" class="no-loc" data-linktype="absolute-path">Timestamp</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlbinary" class="no-loc" data-linktype="absolute-path">GetSqlBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-binary" class="no-loc" data-linktype="absolute-path">Binary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getbytes" class="no-loc" data-linktype="absolute-path">GetBytes</a></td>
+</tr>
+<tr>
+<td>smalldatetime</td>
+<td>DateTime</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-datetime" class="no-loc" data-linktype="absolute-path">DateTime</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqldatetime" class="no-loc" data-linktype="absolute-path">GetSqlDateTime</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-datetime" class="no-loc" data-linktype="absolute-path">DateTime</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdatetime" class="no-loc" data-linktype="absolute-path">GetDateTime</a></td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>Int16</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-smallint" class="no-loc" data-linktype="absolute-path">SmallInt</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlint16" class="no-loc" data-linktype="absolute-path">GetSqlInt16</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-int16" class="no-loc" data-linktype="absolute-path">Int16</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getint16" class="no-loc" data-linktype="absolute-path">GetInt16</a></td>
+</tr>
+<tr>
+<td>smallmoney</td>
+<td>Decimal</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-smallmoney" class="no-loc" data-linktype="absolute-path">SmallMoney</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlmoney" class="no-loc" data-linktype="absolute-path">GetSqlMoney</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-decimal" class="no-loc" data-linktype="absolute-path">Decimal</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getdecimal" class="no-loc" data-linktype="absolute-path">GetDecimal</a></td>
+</tr>
+<tr>
+<td>sql_variant</td>
+<td>Object <sup>2</sup></td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-variant" class="no-loc" data-linktype="absolute-path">Variant</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlvalue" class="no-loc" data-linktype="absolute-path">GetSqlValue</a> <sup>2</sup></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-object" class="no-loc" data-linktype="absolute-path">Object</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getvalue" class="no-loc" data-linktype="absolute-path">GetValue</a> <sup>2</sup></td>
+</tr>
+<tr>
+<td>text</td>
+<td>String<br><br> Char[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-text" class="no-loc" data-linktype="absolute-path">Text</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlstring" class="no-loc" data-linktype="absolute-path">GetSqlString</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-string" class="no-loc" data-linktype="absolute-path">String</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getstring" class="no-loc" data-linktype="absolute-path">GetString</a><br><br> <a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getchars" class="no-loc" data-linktype="absolute-path">GetChars</a></td>
+</tr>
+<tr>
+<td>time<br><br> (SQL Server 2008 and later)</td>
+<td>TimeSpan</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-time" class="no-loc" data-linktype="absolute-path">Time</a></td>
+<td>none</td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-time" class="no-loc" data-linktype="absolute-path">Time</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.gettimespan" class="no-loc" data-linktype="absolute-path">GetTimeSpan</a></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Byte[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-timestamp" class="no-loc" data-linktype="absolute-path">Timestamp</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlbinary" class="no-loc" data-linktype="absolute-path">GetSqlBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-binary" class="no-loc" data-linktype="absolute-path">Binary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getbytes" class="no-loc" data-linktype="absolute-path">GetBytes</a></td>
+</tr>
+<tr>
+<td>tinyint</td>
+<td>Byte</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-tinyint" class="no-loc" data-linktype="absolute-path">TinyInt</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlbyte" class="no-loc" data-linktype="absolute-path">GetSqlByte</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-byte" class="no-loc" data-linktype="absolute-path">Byte</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getbyte" class="no-loc" data-linktype="absolute-path">GetByte</a></td>
+</tr>
+<tr>
+<td>uniqueidentifier</td>
+<td>Guid</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-uniqueidentifier" class="no-loc" data-linktype="absolute-path">UniqueIdentifier</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlguid" class="no-loc" data-linktype="absolute-path">GetSqlGuid</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-guid" class="no-loc" data-linktype="absolute-path">Guid</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getguid" class="no-loc" data-linktype="absolute-path">GetGuid</a></td>
+</tr>
+<tr>
+<td>varbinary</td>
+<td>Byte[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-varbinary" class="no-loc" data-linktype="absolute-path">VarBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlbinary" class="no-loc" data-linktype="absolute-path">GetSqlBinary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-binary" class="no-loc" data-linktype="absolute-path">Binary</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getbytes" class="no-loc" data-linktype="absolute-path">GetBytes</a></td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>String<br><br> Char[]</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-varchar" class="no-loc" data-linktype="absolute-path">VarChar</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlstring" class="no-loc" data-linktype="absolute-path">GetSqlString</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-ansistring" class="no-loc" data-linktype="absolute-path">AnsiString</a>, <a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-string" class="no-loc" data-linktype="absolute-path">String</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getstring" class="no-loc" data-linktype="absolute-path">GetString</a><br><br> <a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getchars" class="no-loc" data-linktype="absolute-path">GetChars</a></td>
+</tr>
+<tr>
+<td>xml</td>
+<td>Xml</td>
+<td><a href="/en-us/dotnet/api/system.data.sqldbtype#system-data-sqldbtype-xml" class="no-loc" data-linktype="absolute-path">Xml</a></td>
+<td><a href="/en-us/dotnet/api/system.data.sqlclient.sqldatareader.getsqlxml" class="no-loc" data-linktype="absolute-path">GetSqlXml</a></td>
+<td><a href="/en-us/dotnet/api/system.data.dbtype#system-data-dbtype-xml" class="no-loc" data-linktype="absolute-path">Xml</a></td>
+<td>none</td>
+</tr>
+</tbody>
+</table></div><!----></div>
+	</div>
