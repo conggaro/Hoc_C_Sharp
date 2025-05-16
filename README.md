@@ -663,3 +663,24 @@ Guid.NewGuid(): Phương thức tĩnh NewGuid() của lớp Guid trong C# đư�
 
 Kết Quả
 Ngày khi đoạn mã string reggroupId = Guid.NewGuid().ToString(); được thực thi, nó sẽ trả về một giá trị chuỗi đại diện cho một UUID mới, ví dụ: "a2b1a90f-83e5-4b10-9d0f-8c7d9e449644". Điều này rất hữu ích trong các tình huống như việc tạo khóa chính cho cơ sở dữ liệu, xác thực người dùng hoặc trong các ứng dụng cần phân biệt đối tượng một cách duy nhất.</pre>
+
+# SignalR là gì?
+<pre>SignalR là một thư viện trong ASP.NET, giúp xây dựng các ứng dụng web thời gian thực. Nó cho phép server và client giao tiếp với nhau một cách hiệu quả và tức thì, hỗ trợ nhiều kỹ thuật kết nối và giao thức.
+
+Tính Năng Chính của SignalR
+Giao Tiếp Thời Gian Thực: SignalR cho phép server gửi thông điệp đến client ngay lập tức mà không cần client phải yêu cầu.
+
+Hỗ Trợ Nhiều Kỹ Thuật Kết Nối: SignalR tự động chọn kỹ thuật kết nối tốt nhất để sử dụng, như WebSockets, Server-Sent Events, hoặc Long Polling.
+
+Khả Năng Mở Rộng: Thư viện này hỗ trợ nhiều kết nối đồng thời, giúp xây dựng các ứng dụng có tính tương tác cao như chat, bảng điều khiển trực tiếp, và các ứng dụng game.
+
+Quản Lý Kết Nối: SignalR cung cấp các API để quản lý kết nối, cho phép bạn theo dõi trạng thái kết nối của client.
+
+Hỗ Trợ Các Tính Năng Như Nhóm: Bạn có thể gửi thông điệp đến một nhóm client cụ thể, giúp dễ dàng quản lý các tình huống như chat nhóm.
+
+Ứng Dụng Thực Tế
+Ứng dụng Chat: Xây dựng các ứng dụng chat thời gian thực.
+Thông Báo: Gửi thông báo tự động đến client khi có cập nhật mới.
+Game Trực Tuyến: Tạo các game với tương tác thời gian thực giữa người chơi.
+Tóm Tắt
+SignalR là một công cụ mạnh mẽ cho phát triển ứng dụng web thời gian thực, giúp cải thiện trải nghiệm người dùng bằng cách cung cấp giao tiếp tức thì giữa client và server.</pre>
