@@ -653,3 +653,13 @@ Hash passwords in ASP.NET Core
 </tbody>
 </table></div><!----></div>
 	</div>
+
+# Trả về một chuỗi UUID (GUID) duy nhất mới trong định dạng chuỗi
+<pre>Giải Thích Đoạn Code
+
+Guid.NewGuid(): Phương thức tĩnh NewGuid() của lớp Guid trong C# được sử dụng để tạo ra một UUID (Mã định danh duy nhất) mới. UUID này được tạo ra theo chuẩn RFC 4122 và hầu như không bao giờ trùng lặp với UUID khác, cho phép sử dụng trong các hệ thống phân tán mà không cần lo lắng về xung đột ID.
+
+.ToString(): Sau khi tạo UUID, phương thức ToString() sẽ được gọi để chuyển đổi đối tượng Guid thành một chuỗi. Kết quả là một chuỗi biểu diễn UUID có dạng "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX", trong đó mỗi "X" là một ký tự hex (0-9, a-f).
+
+Kết Quả
+Ngày khi đoạn mã string reggroupId = Guid.NewGuid().ToString(); được thực thi, nó sẽ trả về một giá trị chuỗi đại diện cho một UUID mới, ví dụ: "a2b1a90f-83e5-4b10-9d0f-8c7d9e449644". Điều này rất hữu ích trong các tình huống như việc tạo khóa chính cho cơ sở dữ liệu, xác thực người dùng hoặc trong các ứng dụng cần phân biệt đối tượng một cách duy nhất.</pre>
