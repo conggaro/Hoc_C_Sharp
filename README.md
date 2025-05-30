@@ -684,3 +684,6 @@ Thông Báo: Gửi thông báo tự động đến client khi có cập nhật m
 Game Trực Tuyến: Tạo các game với tương tác thời gian thực giữa người chơi.
 Tóm Tắt
 SignalR là một công cụ mạnh mẽ cho phát triển ứng dụng web thời gian thực, giúp cải thiện trải nghiệm người dùng bằng cách cung cấp giao tiếp tức thì giữa client và server.</pre>
+
+# Xóa Service bằng CMD
+sc delete YourServiceName
