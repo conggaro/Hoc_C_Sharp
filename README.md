@@ -687,3 +687,16 @@ SignalR là một công cụ mạnh mẽ cho phát triển ứng dụng web th�
 
 # Xóa Service bằng CMD
 sc delete YourServiceName
+
+# Hàm lấy ra tên của cột trong Excel, đầu vào là số, đầu ra là tên cột
+<pre>public static string GetExcelColumnName(int columnNumber)
+    {
+        string columnName = "";
+        while (columnNumber > 0)
+        {
+            int modulo = (columnNumber - 1) % 26;
+            columnName = (char)(modulo + 'A') + columnName;
+            columnNumber = (columnNumber - modulo) / 26;
+        }
+        return columnName;
+    }</pre>
