@@ -700,3 +700,25 @@ sc delete YourServiceName
         }
         return columnName;
     }</pre>
+
+# Cách kiểm tra process nào đang dùng port
+<pre>check xem service nào đang dùng port 44359
+netstat -aon | findstr :44359
+
+
+Nếu có kết quả, bạn sẽ thấy dòng chứa PID (Process ID) ở cột cuối.
+192.168.4.103:44359    74.125.203.188:5228    ESTABLISHED     22588
+
+
+Bạn đã xác định PID là 22588 đang sử dụng port 44359
+
+
+Để kiểm tra process nào, hãy chạy lệnh sau
+tasklist /FI "PID eq 22588"
+
+
+Nếu muốn biết chi tiết hơn (ví dụ service nào), có thể dùng
+tasklist /svc /FI "PID eq 22588"
+
+
+netstat -aon</pre>
