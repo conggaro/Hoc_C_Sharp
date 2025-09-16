@@ -732,3 +732,17 @@ string base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(unicod
 // Lấy 'base64' từ DB, chuyển lại về Unicode
 string base64FromDb = base64;
 string unicodeText2 = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(base64FromDb));</pre>
+
+# Chuyển Text sang Hex
+<pre>// Encode Unicode to Hex
+string unicodeText3 = "kiểu kiểu";
+string hex = BitConverter.ToString(System.Text.Encoding.UTF8.GetBytes(unicodeText3)).Replace("-", "");
+// Lưu 'hex' vào varchar
+
+
+// Decode Hex về Unicode
+string hexFromDb = hex;
+byte[] bytes = Enumerable.Range(0, hexFromDb.Length / 2)
+    .Select(x => Convert.ToByte(hexFromDb.Substring(x * 2, 2), 16))
+    .ToArray();
+string unicodeText4 = System.Text.Encoding.UTF8.GetString(bytes);</pre>
