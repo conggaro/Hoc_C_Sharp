@@ -746,3 +746,14 @@ byte[] bytes = Enumerable.Range(0, hexFromDb.Length / 2)
     .Select(x => Convert.ToByte(hexFromDb.Substring(x * 2, 2), 16))
     .ToArray();
 string unicodeText4 = System.Text.Encoding.UTF8.GetString(bytes);</pre>
+
+# Chuyển text sang URL
+<pre>// Encode Unicode to URL
+string unicodeText5 = "kiểu kiểu";
+string urlEncoded = Uri.EscapeDataString(unicodeText5);
+// Lưu 'urlEncoded' vào varchar
+
+
+// Decode URL về Unicode
+string urlEncodedFromDb = urlEncoded;
+string unicodeText6 = Uri.UnescapeDataString(urlEncodedFromDb);</pre>
