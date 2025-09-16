@@ -722,3 +722,13 @@ tasklist /svc /FI "PID eq 22588"
 
 
 netstat -aon</pre>
+
+# Chuyển Text sang Base64
+<pre>// Chuyển Unicode sang Base64
+string unicodeText = "kiểu kiểu";
+string base64 = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(unicodeText));
+// Lưu 'base64' vào cột varchar(255)
+
+// Lấy 'base64' từ DB, chuyển lại về Unicode
+string base64FromDb = base64;
+string unicodeText2 = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(base64FromDb));</pre>
