@@ -1,0 +1,6 @@
+điều hướng con trỏ về thư mục gốc
+cd /
+
+
+xóa hết các câu lệnh cũ
+clear
