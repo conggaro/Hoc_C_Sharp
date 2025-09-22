@@ -1,0 +1,57 @@
+tôi có câu lệnh sql như sau
+SELECT * FROM HU_SALARY_TYPE WHERE CODE IN (N'ĐTL004', N'ĐTL001', N'ÐTL005')
+
+kết quả trả về đối với trường hợp copy đoạn text "ĐTL001" là 3 bản ghi
+đối với trường hợp tôi gõ phím D 2 lần để được ký tự "Đ" thì kết quả trả về là 2 bản ghi
+tại sao lại có 2 kết quả trả về khác nhau như vậy
+
+
+
+Hiện tượng này là do sự khác biệt giữa ký tự Unicode "Đ" (U+0110) và ký tự Latin "D" hoặc ký tự "Ð" (U+00D0) trong dữ liệu hoặc trong câu lệnh SQL.
+Giải thích chi tiết:
+•	Khi bạn copy đoạn text "ĐTL001" từ nơi khác, ký tự "Đ" có thể là ký tự Unicode chuẩn (U+0110).
+•	Khi bạn gõ phím D 2 lần (tùy vào bộ gõ), có thể bạn đang nhập ký tự "D" (U+0044) hoặc ký tự "Ð" (U+00D0, Latin Capital Letter Eth), không phải là "Đ" (U+0110, Latin Capital Letter D with Stroke).
+Trong cơ sở dữ liệu:
+•	Nếu cột CODE chứa cả các giá trị với "Đ" (U+0110) và "Ð" (U+00D0), thì khi bạn truy vấn với N'ĐTL001' (U+0110) sẽ chỉ khớp với các bản ghi có đúng ký tự này.
+•	Nếu bạn truy vấn với N'ÐTL001' (U+00D0), sẽ chỉ khớp với các bản ghi có ký tự này.
+Vì sao lại ra 3 bản ghi khi copy, 2 bản ghi khi gõ?
+•	Có thể trong bảng HU_SALARY_TYPE đang tồn tại cả 2 loại mã: một số bản ghi dùng "Đ" (U+0110), một số bản ghi dùng "Ð" (U+00D0).
+•	Khi bạn copy, chuỗi truy vấn chứa đúng ký tự Unicode "Đ" (U+0110) nên trả về đúng 3 bản ghi.
+•	Khi bạn gõ phím D 2 lần, có thể bộ gõ sinh ra ký tự "Ð" (U+00D0), nên chỉ khớp với 2 bản ghi có ký tự này.
+Cách kiểm tra: Bạn có thể kiểm tra mã Unicode của từng bản ghi bằng cách dùng hàm UNICODE() trong SQL Server:
+
+SELECT CODE, UNICODE(LEFT(CODE, 1)) AS FirstCharCode
+FROM HU_SALARY_TYPE
+WHERE CODE LIKE 'ÐTL%'
+   OR CODE LIKE 'ĐTL%'
+
+
+•	Nếu FirstCharCode là 272 → "Đ" (U+0110)
+•	Nếu FirstCharCode là 208 → "Ð" (U+00D0)
+Kết luận:
+Dữ liệu của bạn đang bị lẫn lộn giữa hai ký tự "Đ" (U+0110) và "Ð" (U+00D0). Nên chuẩn hóa lại dữ liệu để chỉ dùng một loại ký tự "Đ" (U+0110) cho tiếng Việt.
+
+
+
+
+hàm C# để kiểm tra
+
+public static void CheckDCharacterDifference(string input)
+{
+    if (string.IsNullOrEmpty(input))
+    {
+        Console.WriteLine("Input is null or empty.");
+        return;
+    }
+
+    char firstChar = input[0];
+    int unicode = firstChar;
+    Console.WriteLine($"Ký tự đầu: '{firstChar}' - Unicode: U+{unicode:X4} ({unicode})");
+
+    if (firstChar == 'Đ')
+        Console.WriteLine("Đây là ký tự Đ (U+0110)");
+    else if (firstChar == 'Ð')
+        Console.WriteLine("Đây là ký tự Ð (U+00D0)");
+    else
+        Console.WriteLine("Đây là ký tự khác.");
+}
