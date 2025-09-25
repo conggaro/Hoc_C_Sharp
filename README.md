@@ -782,3 +782,54 @@ string unicodeText6 = Uri.UnescapeDataString(urlEncodedFromDb);</pre>
 
 <pre>👉 Ưu điểm: Viết đơn giản, chạy được ngay.
 👉 Nhược điểm: Toàn bộ dữ liệu của HU_WORKING sẽ load về memory, sau đó mới tính rank → nếu bảng lớn thì tốn RAM.</pre>
+
+# Kiểm tra dữ liệu load lên RAM
+<pre>À, câu hỏi này hay 👍. Trong Entity Framework / LINQ to SQL, bạn cần phân biệt rõ:
+
+Trước khi gọi .ToList(), .AsEnumerable(), .FirstOrDefault()... thì EF vẫn chỉ tạo query expression → chưa load dữ liệu.
+
+Khi bạn gọi các hàm materialize (ToList(), ToArray(), First(), Count(), Any() …) thì lúc đó EF mới gửi SQL xuống DB, kết quả query được trả về, rồi dữ liệu mới được load vào RAM.
+
+🔍 Kiểm tra xem dữ liệu đã load vào RAM chưa
+
+Có vài cách:
+
+1. Dùng ToList() hoặc ToArray()
+
+Ví dụ:
+
+var data = _dbContext.HuWorkings.ToList(); 
+// Sau dòng này, toàn bộ dữ liệu đã được load vào RAM
+
+2. Dùng IsLoaded (cho Navigation Property)
+
+Nếu bạn quan tâm tới navigation property thì có thể kiểm tra qua Entry(...):
+
+var emp = _dbContext.Employees.First();
+var entry = _dbContext.Entry(emp);
+bool loaded = entry.Collection(e => e.Workings).IsLoaded;
+
+
+👉 Cách này chỉ áp dụng cho navigation, không phải toàn bộ DbSet.
+
+3. Gắn ToList() ngay sau .AsEnumerable()
+
+Trong code của bạn:
+
+var rawData = _dbContext.HuWorkings
+    .Where(x => x.STATUS_ID == statusApprove.ID)
+    .ToList(); // 👈 đảm bảo toàn bộ dữ liệu được load vào RAM ở đây
+
+
+Sau khi .ToList() thì mọi xử lý tiếp theo (GroupBy, OrderBy, Select) chắc chắn chạy trong RAM, không còn query SQL nữa.
+
+⚠️ Lưu ý
+
+Nếu bảng HU_WORKING có hàng trăm nghìn hay triệu bản ghi thì ToList() sẽ load hết vào RAM → nguy hiểm (tốn bộ nhớ, chậm).
+
+Trong thực tế, tốt nhất nên lọc trước trên SQL (Where, Join, Select cần thiết) rồi mới .ToList() để tránh kéo dữ liệu không cần thiết về RAM.
+
+👉 Tóm lại:
+Trong C#, câu lệnh để ép load dữ liệu vào RAM là .ToList() hoặc .ToArray().
+
+Bạn có muốn mình viết cho bạn một helper extension method để test xem một IQueryable đã materialize (load vào RAM) hay chưa không?</pre>
