@@ -757,3 +757,28 @@ string urlEncoded = Uri.EscapeDataString(unicodeText5);
 // Decode URL về Unicode
 string urlEncodedFromDb = urlEncoded;
 string unicodeText6 = Uri.UnescapeDataString(urlEncodedFromDb);</pre>
+
+# Lấy bản ghi theo rank, xếp hạng
+<pre>var ranked = _dbContext.HuWorkings
+            .Where(x =>
+                x.STATUS_ID == statusApprove.ID
+                && salaryTypes.Contains(x.SALARY_TYPE_ID ?? -1)
+                && x.IS_WAGE == -1)
+            .AsEnumerable() // chuyển sang LINQ-to-Objects
+            .GroupBy(w => w.EMPLOYEE_ID)
+            .SelectMany(g => g
+                .OrderByDescending(w => w.EFFECT_DATE)
+                .Select((w, index) => new
+                {
+                    w.ID,
+                    w.EMPLOYEE_ID,
+                    w.EFFECT_DATE,
+                    Rank = index + 1
+                })
+            )
+            .Where(x => x.Rank == 1)
+            .DistinctBy(x => x.EMPLOYEE_ID)
+            .ToList();</pre>
+
+<pre>👉 Ưu điểm: Viết đơn giản, chạy được ngay.
+👉 Nhược điểm: Toàn bộ dữ liệu của HU_WORKING sẽ load về memory, sau đó mới tính rank → nếu bảng lớn thì tốn RAM.</pre>
