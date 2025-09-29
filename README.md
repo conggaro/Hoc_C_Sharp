@@ -833,3 +833,8 @@ Trong thực tế, tốt nhất nên lọc trước trên SQL (Where, Join, Sele
 Trong C#, câu lệnh để ép load dữ liệu vào RAM là .ToList() hoặc .ToArray().
 
 Bạn có muốn mình viết cho bạn một helper extension method để test xem một IQueryable đã materialize (load vào RAM) hay chưa không?</pre>
+
+# Câu lệnh kiểm tra người viết code trên git
+git blame example.cs
+<br>
+git blame <filename>
