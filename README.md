@@ -2,6 +2,9 @@
 <pre>câu lệnh kiểm tra nhánh
 git branch
 
+xóa hết những thay đổi
+	git checkout -- .
+	
 câu lệnh kiểm tra trạng thái
 git status
 
