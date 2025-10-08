@@ -1,3 +1,14 @@
+# Câu lệnh git hay dùng
+<pre>câu lệnh kiểm tra nhánh
+git branch
+
+câu lệnh kiểm tra trạng thái
+git status
+
+câu lệnh chuyển nhánh
+có tên là khongMaHoa_tvc
+git checkout khongMaHoa_tvc</pre>
+
 # Cách xem Console.WriteLine() trong dự án WEB API (IDE là Visual Studio 2022)
 View => Output => Chọn API - ASP.NET Core Web Server
 
