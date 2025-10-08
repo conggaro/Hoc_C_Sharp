@@ -3,7 +3,7 @@
 git branch
 
 xóa hết những thay đổi
-	git checkout -- .
+git checkout -- .
 	
 câu lệnh kiểm tra trạng thái
 git status
