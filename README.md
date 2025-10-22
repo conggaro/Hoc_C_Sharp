@@ -12,6 +12,22 @@ câu lệnh chuyển nhánh
 có tên là khongMaHoa_tvc
 git checkout khongMaHoa_tvc</pre>
 
+# Thêm thư viện để chạy code / Thêm Project Reference
+<pre>nếu muốn thêm 1 thư viện vào trong project
+ví dụ cho 1 project là API.csproj
+có file .sln là API.sln
+
+Cho 1 thư viện có project là core.business.csproj
+có file .sln là core.business.sln
+
+cách để ở project API.csproj
+có thể gọi hàm ở core.business.csproj
+là chuột phải vào API.sln rồi Add Project Existing
+sau đó chuột phải vào API.csproj > Add > Project Reference > Tìm đến core.business
+thì tích vào để chọn
+bấm ok
+thế là chạy code rồi debug được rồi đấy</pre>
+
 # Cách xem Console.WriteLine() trong dự án WEB API (IDE là Visual Studio 2022)
 View => Output => Chọn API - ASP.NET Core Web Server
 
