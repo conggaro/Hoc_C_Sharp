@@ -1,0 +1,23 @@
+public class Program
+{
+    public static void Main()
+    {
+        List<string> codes = new List<string> { "A123", "B456", "A123", "C789", "B456", "D012", "A123", "A123" };
+        List<string> duplicates = GetDuplicateCodes(codes);
+
+        Console.WriteLine("Duplicate Codes:");
+        foreach (var code in duplicates)
+        {
+            Console.WriteLine(code);
+        }
+    }
+
+    public static List<string> GetDuplicateCodes(List<string> codes)
+    {
+        return codes
+            .GroupBy(code => code) // Nhóm các mã giống nhau
+            .Where(group => group.Count() > 1) // Lọc ra nhóm có nhiều hơn 1 mã
+            .Select(group => group.Key) // Chọn mã từ nhóm
+            .ToList(); // Chuyển đổi kết quả thành List<string>
+    }
+}
