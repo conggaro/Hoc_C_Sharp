@@ -1,1 +1,49 @@
 
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Tạo một đối tượng động
+        dynamic dynamicObject = new ExpandoObject();
+        dynamicObject.Name = "John Doe";
+        dynamicObject.Age = 30;
+        dynamicObject.City = "New York";
+        dynamicObject.BirthDate = new DateTime(1999, 12, 31);
+        dynamicObject.Weight = 80.5d; // double
+        dynamicObject.Height = 80.5m; // decimal
+        dynamicObject.IsEmployed = true;
+        dynamicObject.Speed = 10.2f; // float
+
+        // In ra các thuộc tính ban đầu
+        Console.WriteLine("Giá trị ban đầu:");
+        PrintDynamicProperties(dynamicObject);
+
+        // In ra các thuộc tính sau khi cập nhật
+        Console.WriteLine("\nGiá trị sau khi cập nhật:");
+        UpdateDynamicProperties(dynamicObject);
+        PrintDynamicProperties(dynamicObject);
+    }
+
+    public static void PrintDynamicProperties(dynamic obj)
+    {
+        // Lặp qua các thuộc tính của đối tượng và in ra giá trị cùng kiểu dữ liệu
+        var properties = (IDictionary<string, object>)obj;
+
+        foreach (var property in properties)
+        {
+            Console.WriteLine($"{property.Key}: {property.Value} (Type: {property.Value.GetType()})");
+        }
+    }
+
+    public static void UpdateDynamicProperties(dynamic obj)
+    {
+        // Cập nhật giá trị thuộc tính
+        obj.Age = 31; // Cập nhật tuổi
+        obj.City = "Los Angeles"; // Cập nhật thành phố
+        obj.Weight = 82.0d; // Cập nhật cân nặng
+    }
+}
