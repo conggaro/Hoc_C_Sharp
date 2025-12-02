@@ -42,3 +42,98 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+
+
+
+
+
+
+
+-- bài toán duyệt đơn theo level quản lý trực tiếp
+
+-- những công cụ đã có sẵn
+-- 1. hàm lấy id quản lý trực tiếp theo id nhân viên
+-- nhưng màn này chơi được theo level quản lý
+
+
+-- lúc nào tạo đơn sẽ lấy cấu hình từ màn hình
+-- danh mục thiết lập cấp người duyệt
+-- trong màn này sẽ có cột tên quy trình
+-- cấp duyệt đơn
+-- tên quy trình thì ví dụ đăng ký nghỉ, giải trình công,
+-- đăng ký đi muộn về sớm
+
+
+-- mỗi màn tạo mới thì sẽ được code tạo mới riêng
+-- lúc nào viết hàm tạo mới thì viết riêng từng cái
+
+
+-- trên 1 đơn thì sẽ có thêm trường
+-- INITIALIZE_LEVEL và TARGET_LEVEL
+-- trường trạng thái đơn nữa
+
+
+-- sau khi nhân viên đăng ký 1 đơn xong
+-- thì dữ liệu sẽ được điền vào các cột 
+-- INITIALIZE_LEVEL và TARGET_LEVEL, cột trạng thái đơn nữa
+
+-- đối với tài khoản HR Admin thì chỉ quan tâm trạng thái đơn
+-- lúc lấy ra list đơn
+
+
+-- đối với tài khoản quản lý trực tiếp
+-- cũng quan tâm đến trạng thái đơn
+-- chỉ lấy ra những đơn chưa duyệt
+
+-- để lấy ra đơn cho quản lý
+-- thì cho chạy vòng for tất cả đơn
+-- mỗi đơn thì cho chạy vào hàm 
+-- hàm sẽ trả về ID của quản lý theo cấp quản lý
+
+
+-- hàm view có rồi
+-- thì bây giờ đến hàm duyệt
+-- đối với tài khoản HR ADMIN
+-- thì duyệt phát thì cho "đã duyệt" luôn
+
+-- đối với quản lý
+-- nếu TARGET_LEVEL = level của màn hình cấu hình quản lý duyệt
+-- thì cho đơn đấy là "đã duyệt"
+
+-- nếu TARGET_LEVEL nhỏ hơn level của màn hình cấu hình quản lý duyệt
+-- thì cộng TARGET_LEVEL thêm 1
+-- vì target level tăng
+-- thì nó mới chạy động dc đến quản lý trực tiếp level tiếp theo
+
+
+CREATE TABLE BANG_DON_DANG_KY_NGHI(
+    ID bigint IDENTITY(1, 1) PRIMARY KEY,
+    EMPLOYEE_ID bigint,
+    INITIALIZE_LEVEL int,
+    TARGET_LEVEL int,
+    STATUS_ID bigint
+)
+
+
+CREATE table BANG_CAU_HINH_CAP_QUAN_LY_DUYET (
+    ID bigint IDENTITY(1, 1) PRIMARY KEY,
+    CODE NVARCHAR(255),
+    [NAME] NVARCHAR(255),
+    LEVEL_MANAGER_FOR_APPROVE int
+)
+
+insert into BANG_CAU_HINH_CAP_QUAN_LY_DUYET
+values('LEAVE', N'Đăng ký nghỉ', 1);
+
+
+SELECT *
+FROM BANG_CAU_HINH_CAP_QUAN_LY_DUYET;
+
+
+SELECT *
+FROM BANG_DON_DANG_KY_NGHI;
+
+
+UPDATE BANG_DON_DANG_KY_NGHI
+set STATUS_ID = 993
