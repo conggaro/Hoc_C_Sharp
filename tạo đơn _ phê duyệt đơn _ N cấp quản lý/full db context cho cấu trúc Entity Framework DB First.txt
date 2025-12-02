@@ -1,0 +1,1101 @@
+using CORE.ApiContract;
+using CORE.Extension;
+using CORE.CrossProjectHelper;
+using Microsoft.Extensions.Options;
+using CORE.KeylessEntity;
+using CORE.Interceptors;
+using CORE.WorkflowPlanning.Domain.Entities;
+using CORE.DocGen.Entities;
+
+namespace API.All.DbContexts
+{
+    public class FullDbContext(DbContextOptions<FullDbContext> dbContextOptions, IOptions<AppSettings> options, IServiceProvider serviceProvider) : BaseDbContext(dbContextOptions, options), IFullDbContext
+    {
+
+        //public AppSettings _appSettings = options.Value;
+
+        private readonly IServiceProvider _serviceProvider = serviceProvider;
+
+        #region Backward compatibility
+        public string UserName = HttpContextHelper.Current != null ? HttpContextHelper.Current!.Request.Username(options.Value) : "";
+        public string CurrentUserId = HttpContextHelper.Current != null ? HttpContextHelper.Current!.Request.Sid(options.Value) : "";
+        public long EmpId = HttpContextHelper.Current != null ? HttpContextHelper.Current!.Request.EmployeeId(options.Value) : 0;
+        public bool IsAdmin = HttpContextHelper.Current != null ? HttpContextHelper.Current!.Request.IsAdmin(options.Value) : false;
+        #endregion Backward compatibility
+
+        /* 
+        * Start: Keyless
+        * In addition to regular entity types, an EF Core model can contain keyless entity types, 
+        * which can be used to carry out database queries against data that doesn't contain key values.
+        */
+
+        public DbSet<UniqueIndex> UniqueIndexes { get; set; }
+
+        /* End Keyless*/
+
+
+        public DbSet<SSRS_LOG> SsrsLogs { get; set; }
+        public DbSet<BANG_DON_DANG_KY_NGHI> BangDonDangKyNghis { get; set; }
+        public DbSet<BANG_CAU_HINH_CAP_QUAN_LY_DUYET> BangCauHinhCapQuanLyDuyets { get; set; }
+
+
+        public DbSet<AD_BOOKING> AdBookings { get; set; }
+        public DbSet<PA_PAYSLIP> PaPayslips { get; set; }
+        public DbSet<AD_PROGRAMS> AdProgramss { get; set; }
+
+        public DbSet<AD_ROOM> AdRooms { get; set; }
+
+        public DbSet<HU_DYNAMIC_REPORT> HuDynamicReports { get; set; }
+
+        public DbSet<AD_REQUEST> AdRequests { get; set; }
+        public DbSet<AD_REQUESTS_QUEUE> AdRequestsQueues { get; set; }
+        public DbSet<AD_REQUEST_PARAMETER> AdRequestParameters { get; set; }
+
+        public DbSet<AT_APPROVED> AtApproveds { get; set; }
+
+        public DbSet<AT_CONFIG> AtConfigs { get; set; }
+
+        public DbSet<AT_DAYOFFYEAR> AtDayoffyears { get; set; }
+
+        public DbSet<AT_DAYOFFYEAR_CONFIG> AtDayoffyearConfigs { get; set; }
+
+        public DbSet<AT_ENTITLEMENT> AtEntitlements { get; set; }
+
+        public DbSet<AT_ENTITLEMENT_EDIT> AtEntitlementEdits { get; set; }
+        public DbSet<HU_EMPLOYEE_BANK> HuEmployeeBanks { get; set; }
+
+        public DbSet<BASE_AT_HOLIDAY> BaseAtHolidays { get; set; }
+        public DbSet<AT_HOLIDAY> AtHolidays { get; set; }
+
+        public DbSet<AT_HOLIDAY_WORKING_DAY> AtHolidayWorkingDays { get; set; }
+
+        public DbSet<AT_NOTIFICATION> AtNotifications { get; set; }
+
+        public DbSet<AT_OVERTIME> AtOvertimes { get; set; }
+        public DbSet<AT_OVERTIME_ROOT> AtOvertimeRoots { get; set; }
+
+        public DbSet<AT_OVERTIME_CONFIG> AtOvertimeConfigs { get; set; }
+
+        public DbSet<AT_PERIOD_STANDARD> AtPeriodStandards { get; set; }
+
+        public DbSet<AT_REGISTER_OFF> AtRegisterOffs { get; set; }
+
+        public DbSet<BASE_AT_SALARY_PERIOD> BaseAtSalaryPeriods { get; set; }
+
+        public DbSet<AT_SALARY_PERIOD> AtSalaryPeriods { get; set; }
+
+        public DbSet<AT_SALARY_PERIOD_DTL> AtSalaryPeriodDtls { get; set; }
+
+        public DbSet<AT_SETUP_TIME_EMP> AtSetupTimeEmps { get; set; }
+
+        public DbSet<BASE_AT_SHIFT> BaseAtShifts { get; set; }
+
+        public DbSet<BASE_HU_NATION> BaseHuNations { get; set; }
+        public DbSet<BASE_HU_PROVINCE> BaseHuProvinces { get; set; }
+        public DbSet<BASE_HA_PROVINCE> BaseHaProvinces { get; set; }
+        public DbSet<BASE_HU_DISTRICT> BaseHuDistricts { get; set; }
+        public DbSet<BASE_HU_WARD> BaseHuWards { get; set; }
+        public DbSet<BASE_HA_WARD> BaseHaWards { get; set; }
+
+        public DbSet<AT_SHIFT> AtShifts { get; set; }
+
+        public DbSet<AT_SHIFT_PATTERN> AtShiftPatterns { get; set; }
+
+        public DbSet<AT_SHIFT_PATTERN_DETAIL> AtShiftPatternDetails { get; set; }
+
+        public DbSet<AT_SIGN_DEFAULT> AtSignDefaults { get; set; }
+
+        public DbSet<AT_SWIPE_DATA> AtSwipeDatas { get; set; }
+
+        public DbSet<AT_SWIPE_DATA_IMPORT> AtSwipeDataImports { get; set; }
+        public DbSet<HU_EMPLOYEE_BANK_IMPORT> HuEmployeeBankImports { get; set; }
+        public DbSet<AT_OBJECT_WORKS> AtObjectWorkss { get; set; }
+
+        public DbSet<AT_SWIPE_DATA_TMP> AtSwipeDataTmps { get; set; }
+        public DbSet<AT_SWIPE_DATA_SYNC> SwipeDataSyncs { get; set; }
+        public DbSet<AT_SWIPE_DATA_WRONG> AtSwipeDataWrongs { get; set; }
+        public DbSet<AT_TIME_FORMULAR> AtTimeFormulars { get; set; }
+
+        public DbSet<BASE_AT_SYMBOL> BaseAtSymbols { get; set; }
+        public DbSet<AT_SYMBOL> AtSymbols { get; set; }
+
+        public DbSet<AT_TERMINAL> AtTerminals { get; set; }
+
+        public DbSet<AT_TIME_LATE_EARLY> AtTimeLateEarlys { get; set; }
+
+        public DbSet<AT_TIME_EXPLANATION> AtTimeExplanations { get; set; }
+
+        public DbSet<AT_TIME_TIMESHEET_DAILY> AtTimeTimesheetDailys { get; set; }
+        public DbSet<AT_TIME_TIMESHEET_DAILY_BD> AtTimeTimesheetDailyDBs { get; set; }
+
+        //public DbSet<AT_TIME_TYPE> AtTimeTypes { get; set; }
+
+        public DbSet<AT_TIMESHEET_DAILY> AtTimesheetDailys { get; set; }
+
+        public DbSet<AT_TIMESHEET_FORMULA> AtTimesheetFormulas { get; set; }
+
+        public DbSet<AT_TIMESHEET_LOCK> AtTimesheetLocks { get; set; }
+
+        public DbSet<AT_TIMESHEET_MACHINE> AtTimesheetMachines { get; set; }
+
+        public DbSet<AT_TIMESHEET_MACHINE_EDIT> AtTimesheetMachineEdits { get; set; }
+
+        public DbSet<AT_TIMESHEET_MONTHLY> AtTimesheetMonthlys { get; set; }
+        public DbSet<AT_TIMESHEET_MONTHLY_BD> AtTimesheetMonthlyBds { get; set; }
+
+        public DbSet<AT_TIMESHEET_MONTHLY_DTL> AtTimesheetMonthlyDtls { get; set; }
+
+        public DbSet<BASE_AT_WORKSIGN> BaseAtWorksigns { get; set; }
+        public DbSet<AT_WORKSIGN> AtWorksigns { get; set; }
+
+        public DbSet<AT_WORKSIGN_DUTY> AtWorksignDutys { get; set; }
+
+        public DbSet<AT_WORKSIGN_TMP> AtWorksignTmps { get; set; }
+
+        public DbSet<AT_SETUP_GPS> AtSetupGpss { get; set; }
+
+        public DbSet<AT_SETUP_WIFI> AtSetupWifis { get; set; }
+
+        public DbSet<CSS_THEME> CssThemes { get; set; }
+
+        public DbSet<CSS_THEME_VAR> CssThemeVars { get; set; }
+
+        public DbSet<CSS_VAR> CssVars { get; set; }
+
+        public DbSet<DEMO_CRYPTO> DemoCryptos { get; set; }
+
+        public DbSet<DEMO_CRYPTO_SMALL> DemoCryptoSmalls { get; set; }
+
+        public DbSet<DEMO_ATTACHMENT> DemoAttachments { get; set; }
+
+        public DbSet<DEMO_HANGFIRE_RECORD> DemoHangfireRecords { get; set; }
+        public DbSet<HU_CONTRACT_PROCESS_DETAIL> HuContractProcesseDetails { get; set; }
+
+        public DbSet<DEMO_JOB_BENEFIT> DemoJobBenefits { get; set; }
+
+        public DbSet<DEMO_JOB_BENEFIT_DETAIL> DemoJobBenefitDetails { get; set; }
+
+        public DbSet<HRM_INFOTYPE> HrmInfotypes { get; set; }
+
+        public DbSet<HRM_OBJECT> HrmObjects { get; set; }
+        public DbSet<HU_CONTRACT_PROCESS> HuContractProcesses { get; set; }
+        public DbSet<HU_MAN_PROCESS> HuManProcesses { get; set; }
+        public DbSet<HU_TERMINATION_PROCESS> HuTerminationProcesses { get; set; }
+        public DbSet<HU_TRANSFER_PROCESS> HuTransferProcesses { get; set; }
+        public DbSet<HU_BENEFIT_TYPE> HuBenefitTypes { get; set; }
+        public DbSet<HU_ALLOWANCE_SETTING> HuAllowanceSettings { get; set; }
+        public DbSet<HU_ALLOWANCE_SETTING_DETAIL> HuAllowanceSettingDetails { get; set; }
+
+        public DbSet<HU_ALLOWANCE> HuAllowances { get; set; }
+
+        public DbSet<HU_ALLOWANCE_EMP> HuAllowanceEmps { get; set; }
+        public DbSet<HU_ALLOWANCE_EMP_IMPORT> HuAllowanceEmpImports { get; set; }
+        public DbSet<HU_ANSWER> HuAnswers { get; set; }
+        public DbSet<HU_CONCURRENTLY> HuConcurrentlys { get; set; }
+        public DbSet<HU_COMPETENCY> HuCompetencys { get; set; }
+        public DbSet<HU_COMPETENCY_ASPECT> HuCompetencyAspects { get; set; }
+        public DbSet<HU_COMPETENCY_DICT> HuCompetencyDicts { get; set; }
+        public DbSet<HU_COMPETENCY_GROUP> HuCompetencyGroups { get; set; }
+        public DbSet<HU_ANSWER_USER> HuAnswerUsers { get; set; }
+
+        public DbSet<HU_BANK> HuBanks { get; set; }
+
+        public DbSet<HU_BANK_BRANCH> HuBankBranchs { get; set; }
+
+        public DbSet<HU_CERTIFICATE> HuCertificates { get; set; }
+        public DbSet<HU_CERTIFICATE_IMPORT> HuCertificateImports { get; set; }
+        public DbSet<HU_COM_EMPLOYEE_MNG> HuComEmployeeMngs { get; set; }
+        public DbSet<HU_COMMEND> HuCommends { get; set; }
+        public DbSet<HU_COM_COMMEND> HuComCommends { get; set; }
+        public DbSet<HU_COMMEND_IMPORT> HuCommendImports { get; set; }
+
+        public DbSet<HU_WORKING_ALLOW> WorkingAllowances { get; set; }
+
+        public DbSet<HU_WORKING_BEFORE> HuWorkingBefores { get; set; }
+
+        public DbSet<HU_WORKING_BEFORE_EDIT> HuWorkingBeforeEdits { get; set; }
+
+        public DbSet<HU_COMMEND_EMP> HuCommendEmps { get; set; }
+
+        public DbSet<HU_COMPANY> HuCompanys { get; set; }
+
+        public DbSet<HU_CONTRACT> HuContracts { get; set; }
+        public DbSet<HU_CONTRACT_IMPORT> HuContractImports { get; set; }
+
+        public DbSet<HU_FILECONTRACT> HuFileContracts { get; set; }
+        public DbSet<HU_FILECONTRACT_IMPORT> HuFilecontractImports { get; set; }
+
+        public DbSet<HU_CONTRACT_TYPE> HuContractTypes { get; set; }
+        public DbSet<HU_CONTRACT_PROCEDURE> HuContractProcedures { get; set; }
+
+        public DbSet<HU_DISCIPLINE> HuDisciplines { get; set; }
+        public DbSet<HU_DISCIPLINE_EMP> HuDisciplineEmps { get; set; }
+        public DbSet<HU_DISTRICT> HuDistricts { get; set; }
+
+        public DbSet<BASE_HU_EMPLOYEE> BaseHuEmployees { get; set; }
+        public DbSet<HU_EMPLOYEE> HuEmployees { get; set; }
+
+        public DbSet<HU_EMPLOYEE_IMPORT> HuEmployeeImports { get; set; }
+
+        public DbSet<BASE_HU_EMPLOYEE_CV> BaseHuEmployeeCvs { get; set; }
+        public DbSet<HU_EMPLOYEE_CV> HuEmployeeCvs { get; set; }
+
+        public DbSet<HU_EMPLOYEE_CV_IMPORT> HuEmployeeCvImports { get; set; }
+
+        public DbSet<HU_EMPLOYEE_CV_EDIT> HuEmployeeCvEdits { get; set; }
+
+        public DbSet<HU_EMPLOYEE_EDIT> HuEmployeeEdits { get; set; }
+
+        public DbSet<HU_EMPLOYEE_PAPERS> HuEmployeePaperss { get; set; }
+
+        //public DbSet<HU_EMPLOYEE_TMP> HuEmployeeTmps { get; set; }
+
+        public DbSet<HU_FAMILY> HuFamilys { get; set; }
+
+        public DbSet<HU_FAMILY_EDIT> HuFamilyEdits { get; set; }
+
+        public DbSet<HU_FORM_ELEMENT> HuFormElements { get; set; }
+
+        public DbSet<HU_FORM_LIST> HuFormLists { get; set; }
+
+        public DbSet<HU_FROM_ELEMENT> HuFromElements { get; set; }
+
+        public DbSet<HU_SECTION> HuSections { get; set; }
+        public DbSet<HU_SUB_JOB> HuSubJobs { get; set; }
+
+        public DbSet<BASE_HU_JOB> BaseHuJobs { get; set; }
+
+        public DbSet<HU_JOB> HuJobs { get; set; }
+
+        public DbSet<HU_JOB_BAND> HuJobBands { get; set; }
+
+        public DbSet<HU_JOB_DESCRIPTION> HuJobDescriptions { get; set; }
+
+        public DbSet<HU_JOB_FUNCTION> HuJobFunctions { get; set; }
+
+        public DbSet<HU_ORG_LEVEL> HuOrgLevels { get; set; }
+
+        public DbSet<BASE_HU_ORGANIZATION> BaseHuOrganizations { get; set; }
+
+        public DbSet<HU_ORGANIZATION> HuOrganizations { get; set; }
+
+        public DbSet<HU_POS_PAPER> HuPosPapers { get; set; }
+
+        public DbSet<BASE_HU_POSITION> BaseHuPositions { get; set; }
+
+        public DbSet<HU_POSITION> HuPositions { get; set; }
+
+        public DbSet<HU_POSITION_GROUP> HuPositionGroups { get; set; }
+
+        public DbSet<HU_POSITION_ORG_MAP_BUFFER> HuPositionOrgMapBuffers { get; set; }
+
+        // Before 2025-07-01
+        public DbSet<HU_PROVINCE> HuProvinces { get; set; }
+        // Since 2025-07-01
+        public DbSet<HA_PROVINCE> HaProvinces { get; set; }
+        public DbSet<HU_NATION> HuNations { get; set; }
+
+
+        public DbSet<HU_QUESTION> HuQuestions { get; set; }
+
+        public DbSet<HU_REPORT> HuReports { get; set; }
+
+        public DbSet<HU_SALARY_LEVEL> HuSalaryLevels { get; set; }
+
+        public DbSet<HU_SALARY_RANK> HuSalaryRanks { get; set; }
+
+        public DbSet<HU_SALARY_SCALE> HuSalaryScales { get; set; }
+
+        public DbSet<HU_SALARY_TYPE> HuSalaryTypes { get; set; }
+
+        public DbSet<HU_SETTING_REMIND> HuSettingReminds { get; set; }
+
+        public DbSet<HU_TERMINATE> HuTerminates { get; set; }
+
+        public DbSet<HU_TITLE_GROUP> HuTitleGroups { get; set; }
+
+        // Before 2025-07-01
+        public DbSet<HU_WARD> HuWards { get; set; }
+        // Since 2025-07-01
+        public DbSet<HA_WARD> HaWards { get; set; }
+
+        public DbSet<HU_WELFARE> HuWelfares { get; set; }
+
+        public DbSet<HU_WELFARE_CONTRACT> HuWelfareContracts { get; set; }
+
+        public DbSet<HU_WELFARE_MNG> HuWelfareMngs { get; set; }
+        public DbSet<HU_WELFARE_MNG_IMPORT> HuWelfareMngImports { get; set; }
+
+        public DbSet<HU_WORK_LOCATION> HuWorkLocations { get; set; }
+
+        public DbSet<BASE_HU_WORKING> BaseHuWorkings { get; set; }
+        public DbSet<HU_WORKING> HuWorkings { get; set; }
+        public DbSet<HU_WORKING_IMPORT> HuWorkingImports { get; set; }
+        public DbSet<HU_WORKING_ALLOW> HuWorkingAllows { get; set; }
+
+        public DbSet<HUV_ORGANIZATION> ViewOrganizations { get; set; }
+        public DbSet<HUV_WORKING_MAX_BYTYPE> HuVWorkingMaxByTypes { get; set; }
+
+        public DbSet<HUV_WAGE_MAX> HuVWageMax { get; set; }
+        public DbSet<HU_COM_WORKING> HuComWorkings { get; set; }
+        public DbSet<HU_COM_CLASSIFICATION> HuComClassifications { get; set; }
+        public DbSet<HU_COMPETENCY_PERIOD> HuCompetencyPeriods { get; set; }
+        public DbSet<HU_ASSET> HuAssets { get; set; }
+        public DbSet<HU_ASSET_MNG> HuAssetMngs { get; set; }
+        public DbSet<HU_LABOR_MANAGEMENT_BOOK> HuLaborManagementBooks { get; set; }
+        public DbSet<HU_LABOR_MANAGEMENT_BOOK_SUPPORT> HuLaborManagementBookSupports { get; set; }
+
+        public DbSet<INS_CHANGE> InsChanges { get; set; }
+
+        public DbSet<INS_TOTALSALARY> InsTotalsalarys { get; set; }
+
+        public DbSet<INS_CLAIM_INSURANCE> InsClaimInsurances { get; set; }
+
+        public DbSet<INS_HEALTH_INSURANCE> InsHealthInsurances { get; set; }
+
+        public DbSet<INS_INFORMATION> InsInformations { get; set; }
+
+        public DbSet<INS_MATERNITY_MNG> InsMaternityMngs { get; set; }
+
+        public DbSet<INS_SPECIFIED_OBJECTS> InsSpecifiedObjectss { get; set; }
+
+        public DbSet<INS_WHEREHEALTH> InsWhereHealThs { get; set; }
+
+        public DbSet<INS_REGIMES> InsRegimess { get; set; }
+
+        public DbSet<INS_TYPE> InsTypes { get; set; }
+
+        public DbSet<INS_REGION> InsRegions { get; set; }
+
+        public DbSet<INS_ARISING> InsArisings { get; set; }
+
+        public DbSet<INS_GROUP> InsGroups { get; set; }
+
+        public DbSet<INS_REGIMES_MNG> InsRegimesMngs { get; set; }
+
+        public DbSet<INS_LIST_PROGRAM> InsListPrograms { get; set; }
+
+        public DbSet<INS_LIST_CONTRACT> InsListContracts { get; set; }
+
+        public DbSet<INS_LIST_CONTRACT_DETAIL> InsListContractDetails { get; set; }
+
+        public DbSet<INSV_LIST_CONTRACT_DETAIL> InsvListContractDetails { get; set; }
+
+        public DbSet<PA_ADVANCE> PaAdvances { get; set; }
+
+        public DbSet<PA_ADVANCE_TMP> PaAdvanceTmps { get; set; }
+
+        public DbSet<PA_AUTHORITY_TAX_YEAR> PaAuthorityTaxYears { get; set; }
+
+        public DbSet<PA_CALCULATE_LOCK> PaCalculateLocks { get; set; }
+
+        public DbSet<PA_ELEMENT> PaElements { get; set; }
+
+        public DbSet<PA_ELEMENT_GROUP> PaElementGroups { get; set; }
+        public DbSet<PA_EMPLOYEE_BACKDATE> PaEmployeeBackdates { get; set; }
+
+        public DbSet<PA_FORMULA> PaFormulas { get; set; }
+
+        public DbSet<PA_FEEDBACK> PaFeedbacks { get; set; }
+
+        public DbSet<PA_KPI_FORMULA> PaKpiFormulas { get; set; }
+
+        public DbSet<PA_KPI_GROUP> PaKpiGroups { get; set; }
+
+        public DbSet<PA_KPI_LOCK> PaKpiLocks { get; set; }
+
+        public DbSet<PA_KPI_POSITION> PaKpiPositions { get; set; }
+
+        public DbSet<PA_KPI_SALARY_DETAIL> PaKpiSalaryDetails { get; set; }
+
+        public DbSet<PA_KPI_SALARY_DETAIL_TMP> PaKpiSalaryDetailTmps { get; set; }
+
+        public DbSet<PA_KPI_TARGET> PaKpiTargets { get; set; }
+
+        public DbSet<PA_SAL_IMPORT> PaSalImports { get; set; }
+
+        public DbSet<PA_SAL_IMPORT_TMP> PaSalImportTmps { get; set; }
+
+        public DbSet<PA_SALARY_PAYCHECK> PaSalaryPaychecks { get; set; }
+
+        public DbSet<PA_SALARY_POLICY> PaSalaryPolicys { get; set; }
+
+        public DbSet<PA_SALARY_STRUCTURE> PaSalaryStructures { get; set; }
+
+        public DbSet<PA_LISTFUND> PaListfunds { get; set; }
+
+        public DbSet<PA_LIST_FUND_SOURCE> PaListFundSources { get; set; }
+
+        public DbSet<PA_LISTSALARIES> PaListsalariess { get; set; }
+
+        public DbSet<PA_PAYROLL_FUND> PaPayrollFunds { get; set; }
+
+        public DbSet<PA_PAYROLLSHEET_SUM> PaPayrollsheetSums { get; set; }
+
+        public DbSet<PA_PAYROLLSHEET_SUM_BACKDATE> PaPayrollsheetSumBackdates { get; set; }
+
+        public DbSet<PA_PAYROLLSHEET_SUM_SUB> PaPayrollsheetSumSubs { get; set; }
+
+        public DbSet<PA_PAYROLL_TAX_YEAR> PaPayrollTaxYears { get; set; }
+
+        public DbSet<PA_PHASE_ADVANCE> PaPhaseAdvances { get; set; }
+
+        public DbSet<PA_PHASE_ADVANCE_SYMBOL> PaPhaseAdvanceSymbols { get; set; }
+
+        public DbSet<PA_PERIOD_TAX> PaPeriodTaxs { get; set; }
+
+        public DbSet<PA_PAYROLLSHEET_TAX> PaPayrollsheetTaxs { get; set; }
+
+
+        public DbSet<PA_FINAL_SETTLEMENT> PaFinalSettlements { get; set; }
+
+        public DbSet<PA_PERSONAL_INCOME_TAX_BRACKET> PaPersonalIncomeTaxBrackets { get; set; }
+        public DbSet<PA_SAL_IMPORT_ADD> PaSalImportAdds { get; set; }
+
+        public DbSet<PA_IMPORT_MONTHLY_TAX> PaImportMonthlyTaxs { get; set; }
+
+        public DbSet<PA_TAX_ANNUAL_IMPORT> PaTaxAnnualImports { get; set; }
+
+        public virtual DbSet<PORTAL_IMAGE> PortalImages { get; set; }
+
+        public virtual DbSet<PORTAL_POST> PortalPosts { get; set; }
+
+        public virtual DbSet<PORTAL_POST_IMAGE> PortalPostImages { get; set; }
+
+        public virtual DbSet<PORTAL_POST_REACT> PortalPostReacts { get; set; }
+
+        public virtual DbSet<PORTAL_POST_TAG> PortalPostTags { get; set; }
+
+        public virtual DbSet<PORTAL_REACT_TYPE> PortalReactTypes { get; set; }
+
+        public virtual DbSet<PORTAL_TAG> PortalTags { get; set; }
+
+        public DbSet<PORTAL_REQUEST_CHANGE> PortalRequestChanges { get; set; }
+
+        public DbSet<PORTAL_ROUTE> PortalRoutes { get; set; }
+
+        public DbSet<PT_BLOG_INTERNAL> PtBlogInternals { get; set; }
+        public DbSet<RC_PORTAL_PROPOSE> RcPortalProposes { get; set; }
+        public DbSet<RC_CANDIDATE_SCANCV> RcCandidateScancvs { get; set; }
+
+        public DbSet<RC_HR_PLANING_DETAIL> RcHrPlaningDetails { get; set; }
+
+        public DbSet<RC_HR_YEAR_PLANING> RcHrYearPlanings { get; set; }
+
+
+        public DbSet<SE_APP_PROCESS> SeAppProcesss { get; set; }
+
+        public DbSet<SE_APP_TEMPLATE> SeAppTemplates { get; set; }
+        public DbSet<SE_APP_SETUP> SeAppSetups { get; set; }
+        public DbSet<SEV_APP_SETUP> SevAppSetups { get; set; }
+        public DbSet<SE_APP_SETUP_JOB> SeAppSetupJobs { get; set; }
+        public DbSet<SE_APP_SETUP_REGISTER_TYPE> SeAppSetupRegisterTypes { get; set; }
+
+        public DbSet<SE_APP_TEMPLATE_DETAIL> SeAppTemplateDetails { get; set; }
+        public DbSet<SE_CONFIG> SeConfigs { get; set; }
+
+        public DbSet<SE_HR_PROCESS> SeHrProcesss { get; set; }
+
+        public DbSet<SE_HR_PROCESS_DATA_MODEL> SeHrProcessDataModels { get; set; }
+
+        public DbSet<SE_HR_PROCESS_INSTANCE> SeHrProcessInstances { get; set; }
+
+        public DbSet<SE_HR_PROCESS_NODE> SeHrProcessNodes { get; set; }
+
+        public DbSet<SE_LDAP> SeLdaps { get; set; }
+
+        public DbSet<SE_PROCESS> SeProcesss { get; set; }
+
+        public DbSet<SE_AUTHORIZE_APPROVE> SeAuthorizeApproves { get; set; }
+
+        public DbSet<SE_HR_PROCESS_TYPE> SeHrProcessTypes { get; set; }
+
+        public DbSet<SE_PROCESS_APPROVE> SeProcessApproves { get; set; }
+
+        public DbSet<SE_PROCESS_APPROVE_POS> SeProcessApprovePos { get; set; }
+
+        public DbSet<SE_DOCUMENT> SeDocuments { get; set; }
+
+        public DbSet<SE_DOCUMENT_INFO> SeDocumentInfos { get; set; }
+
+        public DbSet<SW_NOTIFICATION> SwNotifications { get; set; }
+
+        public DbSet<SW_PUSH_SUBSCRIPTION> SwPushSubscriptions { get; set; }
+
+        public DbSet<SY_AUDITLOG> SyAuditlogs { get; set; }
+
+        public DbSet<SYS_ACTION> SysActions { get; set; }
+
+        public DbSet<SYS_CONFIG> SysConfigs { get; set; }
+
+        public DbSet<SYS_CONTRACT_TYPE> SysContractTypes { get; set; }
+        public DbSet<SYS_CURRENCY> SysCurrencys { get; set; }
+
+        public DbSet<SYS_FORM_LIST> SysFormLists { get; set; }
+
+        public DbSet<SYS_FUNCTION> SysFunctions { get; set; }
+
+        public DbSet<SYS_FUNCTION_ACTION> SysFunctionActions { get; set; }
+
+        public DbSet<SYS_FUNCTION_GROUP> SysFunctionGroups { get; set; }
+
+        public DbSet<SYS_FUNCTION_IGNORE> SysFunctionIgnores { get; set; }
+
+        public DbSet<SYS_GROUP> SysGroups { get; set; }
+
+        public DbSet<SYS_GROUP_FUNCTION_ACTION> SysGroupFunctionActions { get; set; }
+
+        public DbSet<SYS_GROUP_PERMISSION> SysGroupPermissions { get; set; }
+
+        public DbSet<SYS_KPI> SysKpis { get; set; }
+
+        public DbSet<SYS_KPI_GROUP> SysKpiGroups { get; set; }
+
+        public DbSet<SYS_LANGUAGE> SysLanguages { get; set; }
+
+        public DbSet<SYS_MENU> SysMenus { get; set; }
+
+        public DbSet<SYS_MIGRATION_LOG> SysMigrationLogs { get; set; }
+
+        public DbSet<SYS_MODULE> SysModules { get; set; }
+
+        public DbSet<SYS_MUTATION_LOG> SysMutationLogs { get; set; }
+
+        public DbSet<SYS_OTHER_LIST> SysOtherLists { get; set; }
+
+        public DbSet<SYS_OTHER_LIST_TYPE> SysOtherListTypes { get; set; }
+
+        public DbSet<SYS_PA_ELEMENT> SysPaElements { get; set; }
+
+        public DbSet<SYS_PA_FORMULA> SysPaFormulas { get; set; }
+
+        public DbSet<SYS_REFRESH_TOKEN> SysRefreshTokens { get; set; }
+
+        public DbSet<SYS_SALARY_STRUCTURE> SysSalaryStructures { get; set; }
+
+        public DbSet<SYS_SALARY_TYPE> SysSalaryTypes { get; set; }
+
+        public DbSet<SYS_SETTING_MAP> SysSettingMaps { get; set; }
+
+        public DbSet<SYS_SQL_SERVER_MONITORING> SysSqlServerMonitorings { get; set; }
+
+        public DbSet<SYS_TMP_SORT> SysTmpSorts { get; set; }
+
+        public DbSet<SYS_USER> SysUsers { get; set; }
+
+        public DbSet<SYS_USER_FUNCTION_ACTION> SysUserFunctionActions { get; set; }
+
+        public DbSet<SYS_USER_GROUP_ORG> SysUserGroupOrgs { get; set; }
+
+        public DbSet<SYS_USER_ORG> SysUserOrgs { get; set; }
+
+        public DbSet<SYS_ROUTE_ACCESS> SysRouteAccesses { get; set; }
+        public DbSet<SYS_ROLE> SysRoles { get; set; }
+
+        public DbSet<SYS_USER_ROLE> SysUserRoles { get; set; }
+
+        public DbSet<SYS_WORK_SCHEDULE> SysWorkSchedules { get; set; }
+        public DbSet<SYS_WORK_SCHEDULE_PARTICIPANTS> SysWorkScheduleParticipantses { get; set; }
+
+        public DbSet<THEME_BLOG> ThemeBlogs { get; set; }
+
+        public DbSet<TMP_HU_CONTRACT> TmpHuContracts { get; set; }
+
+        public DbSet<TMP_HU_WORKING> TmpHuWorkings { get; set; }
+
+        public DbSet<TMP_INS_CHANGE> TmpInsChanges { get; set; }
+
+        public DbSet<TR_CENTER> TrCenters { get; set; }
+        public DbSet<TR_CLASS> TrClasss { get; set; }
+
+        public DbSet<TR_CLASSIFICATION> TrClassifications { get; set; }
+
+        public DbSet<TR_COURSE> TrCourses { get; set; }
+        public DbSet<TR_CRITERIA> TrCriterias { get; set; }
+        public DbSet<TR_PLAN> TrPlans { get; set; }
+        public DbSet<TR_PREPARE> TrPrepares { get; set; }
+        public DbSet<TR_REQUEST> TrRequests { get; set; }
+        public DbSet<TR_REQUEST_EMPLOYEE> TrRequestEmployees { get; set; }
+        public DbSet<TR_PROGRAM> TrPrograms { get; set; }
+        public DbSet<TR_SETTING_CRI_COURSE> TrSettingCriCourses { get; set; }
+
+        public DbSet<TR_SETTING_CRI_DETAIL> TrSettingCriDetails { get; set; }
+        public DbSet<TR_REIMBURSEMENT> TrReimbursements { get; set; }
+        public DbSet<TR_PROGRAM_RESULT> TrProgramResults { get; set; }
+        public DbSet<TR_CLASS_RESULT> TrClassResults { get; set; }
+
+        public DbSet<HU_WELFARE_AUTO> HuWelfareAutos { get; set; }
+        public DbSet<BASE_AT_ORG_PERIOD> BaseAtOrgPeriods { get; set; }
+
+        public DbSet<AT_ORG_PERIOD> AtOrgPeriods { get; set; }
+
+        public DbSet<PA_PERIOD_POLICY_EMP> PaPeriodPolicyEmps { get; set; }
+        public DbSet<PA_PERIOD_POLICY_ORG> PaPeriodPolicyOrgs { get; set; }
+
+        public DbSet<AT_REGISTER_LEAVE> AtRegisterLeaves { get; set; }
+        public DbSet<AT_REGISTER_LEAVE_DETAIL> AtRegisterLeaveDetails { get; set; }
+        public DbSet<AT_DECLARE_SENIORITY> AtDeclareSenioritys { get; set; }
+
+        public DbSet<PA_LISTSAL> PaListSals { get; set; }
+        public DbSet<SE_REMINDER> SeReminders { get; set; }
+        public DbSet<HU_COMMEND_EMPLOYEE> HuCommendEmployees { get; set; }
+        public DbSet<HU_COMMEND_EMPLOYEE_IMPORT> HuCommendEmployeeImports { get; set; }
+        public DbSet<HU_EVALUATE> HuEvaluates { get; set; }
+        public DbSet<HU_EVALUATE_IMPORT> HuEvaluateImports { get; set; }
+        public DbSet<AT_OTHER_LIST> AtOtherLists { get; set; }
+        public DbSet<AT_SYNTHESIS_WORK> AtSynthesisWorks { get; set; }
+        public DbSet<AT_SETUP_SYNTHESIS_WORK> AtSetupSynthesisWorks { get; set; }
+        public DbSet<INS_DECLARATION_NEW> InsDeclarationNews { get; set; }
+        public DbSet<HU_EVALUATION_COM> HuEvaluationComs { get; set; }
+        public DbSet<HU_EVALUATION_COM_IMPORT> HuEvaluationComImports { get; set; }
+        public DbSet<HU_EVALUATE_CONCURRENT_IMPORT> HuEvaluateConcurrentImports { get; set; }
+        public DbSet<HU_CLASSIFICATION> HuClassifications { get; set; }
+        public DbSet<PA_SAL_IMPORT_BACKDATE> PaSalImportBackdates { get; set; }
+        public DbSet<HU_MERGE_FIELD> HuMergeFields { get; set; }
+
+        public DbSet<HU_CERTIFICATE_EDIT> HuCertificateEdits { get; set; }
+        public DbSet<HU_WORKING_HSL_PC_IMPORT> HuWorkingHslPcImports { get; set; }
+        public DbSet<HU_WORKING_ALLOW_IMPORT> HuWorkingAllowImports { get; set; }
+        public DbSet<HU_FAMILY_IMPORT> HuFamilyImports { get; set; }
+        public DbSet<RC_EXAMS> RcExamss { get; set; }
+        public DbSet<RC_REQUEST> RcRequests { get; set; }
+        public DbSet<RC_CANDIDATE> RcCandidates { get; set; }
+        public DbSet<RC_CANDIDATE_CV> RcCandidateCvs { get; set; }
+        public DbSet<SYS_CONFIGURATION_COMMON> SysConfigurationCommons { get; set; }
+        public DbSet<SYS_SMTP_CLIENT> SysSmtpClients { get; set; }
+        public DbSet<PORTAL_REGISTER_OFF> PortalRegisterOffs { get; set; }
+        public DbSet<PORTAL_REGISTER_EMPS> PortalRegisterEmps { get; set; }
+        public DbSet<PORTAL_REGISTER_OFF_DETAIL> PortalRegisterOffDetails { get; set; }
+        public DbSet<PORTAL_CERTIFICATE> PortalCertificates { get; set; }
+        public DbSet<SE_PROCESS_APPROVE> ProcessApproves { get; set; }
+        public DbSet<SE_PROCESS_APPROVE_POS> ProcessApprovePoses { get; set; }
+        public DbSet<SE_PROCESS_APPROVE_STATUS> ProcessApproveStatuses { get; set; }
+        public DbSet<SE_NOTIFICATION> SeNotifications { get; set; }
+        public DbSet<HU_WORKING_BEFORE_IMPORT> HuWorkingBeforeImports { get; set; }
+        public DbSet<INS_INFORMATION_IMPORT> InsInformationImports { get; set; }
+        public DbSet<HU_BLACKLIST> HuBlacklists { get; set; }
+        public DbSet<AT_TIME_WORK_STANDARD> AtTimeWorkStandards { get; set; }
+        public DbSet<TR_LECTURE> TrLectures { get; set; }
+        public DbSet<TR_TRANNING_RECORD> TrTranningRecords { get; set; }
+        public DbSet<SYS_MAIL_TEMPLATE> SysMailTemplates { get; set; }
+        public DbSet<SE_MAIL> SeMails { get; set; }
+        public DbSet<TR_ASSESSMENT_RESULT> TrAssessmentResults { get; set; }
+        public DbSet<TR_RESULT_EVALUATION> TrResultEvaluations { get; set; }
+        public DbSet<TR_PROGRAM_COMMIT> TrProgramCommits { get; set; }
+        public DbSet<PE_CAPACITY_FRAMEWORK> PeCapacityFrameworks { get; set; }
+        public DbSet<AS_PROJECT> AsProjects { get; set; }
+        public DbSet<PE_EMPLOYEE_ASSESSMENT> PeEmployeeAssessments { get; set; }
+        public DbSet<HU_PERSONNEL_PLANING> HuPersonnelPlanings { get; set; }
+        public DbSet<SE_NOTIFICATION_HR> SeNotificationHrs { get; set; }
+        public DbSet<SE_NOTIFICATION_EMP> SeNotificationEmps { get; set; }
+
+
+        /* CÁC DbSet dưới đây lấy từ Views để làm nguồn báo cáo */
+        public DbSet<REPORT_DATA_STAFF_PROFILE> ReportDataStaffProfiles { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_EMPLOYEE> HuvDynamicFormEmployees { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_CONTRACT> HuvDynamicFormContracts { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_CONTRACT_APPENDIX> HuvDynamicFormContractAppendices { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_WAGE> HuvDynamicFormWages { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_DECISION> HuvDynamicFormDecisions { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_TERMINATE> HuvDynamicFormTerminates { get; set; }
+        public DbSet<HUV_DYNAMIC_FROM_TERMINATION_DECISION> HuvDynamicFromTerminationDecisions { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_COMMEND> HuvDynamicFormCommends { get; set; }
+        public DbSet<HUV_DYNAMIC_FORM_CALCULATE_PAROLL> HuvDynamicFormCalculateParolls { get; set; }
+        public DbSet<AT_OBJ_PERIOD> AtObjPeriods { get; set; }
+        public DbSet<PA_PARAMETER> PaParameters { get; set; }
+        public DbSet<PA_RATE_DECLARATION> PaRateDeclarations { get; set; }
+        public DbSet<BASE_AT_SHIFT_PATTERN> BaseAtShiftPatterns { get; set; }
+        public DbSet<BASE_AT_SHIFT_PATTERN_DETAIL> BaseAtShiftPatternDetails { get; set; }
+        public DbSet<BASE_HU_TERMINATE> BaseHuTerminates { get; set; }
+
+        public DbSet<AF_GROUP> AfGroups { get; set; }
+        public DbSet<AF_INSTANCE> AfInstances { get; set; }
+        public DbSet<WF_WORKFLOW> WfWorkflows { get; set; }
+        public DbSet<WF_GLOBAL_CONFIG> WfGlobalConfigs { get; set; }
+        public DbSet<WF_WORKFLOW_EMAIL_TEMPLATE> WfWorkflowEmailTemplates { get; set; }
+        public DbSet<WF_WORKFLOW_GROUP> WfWorkflowGroups { get; set; }
+        public DbSet<WF_WORKFLOW_GROUP_TEXT> WfWorkflowGroupTexts { get; set; }
+        public DbSet<WF_WORKFLOW_TEXT> WfWorkflowTexts { get; set; }
+        public DbSet<WF_WORKFLOW_INSTANCE> WfWorkflowInstances { get; set; }
+        public DbSet<WF_STEP_PROGRESS> WfStepProgresses { get; set; }
+        public DbSet<WF_STEP_PROGRESS_ACTOR> WfStepProgressActors { get; set; }
+        public DbSet<WF_WORKFLOW_LOG> WfWorkflowLogs { get; set; }
+
+        public DbSet<BASE_WP_WORKFLOW> BaseWpWorkflows { get; set; }
+        public DbSet<BASE_WP_WORKFLOW_TYPE> BaseWpWorkflowTypes { get; set; }
+        public DbSet<BASE_WP_WORKFLOW_STEP> BaseWpWorkflowSteps { get; set; }
+        public DbSet<BASE_WP_WORKFLOW_ATTRIBUTE> BaseWpWorkflowAttributes { get; set; }
+        public DbSet<BASE_WP_STEP_REQUIREMENT> BaseWpStepRequirements { get; set; }
+
+        public DbSet<WF_SCHEMA_TABLE> WfSchemaTables { get; set; }
+        public DbSet<WF_SCHEMA_METADATA> WfSchemaMetadatas { get; set; }
+        public DbSet<SYS_CUSTOM_CONFIG> SysCustomConfigs { get; set; }
+        public DbSet<SYS_DB_INTEGRITY_LOG> SysDbIntegrityLogs { get; set; }
+        public DbSet<DG_TEMPLATE> DgTemplates { get; set; }
+
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder.Properties<decimal>()
+                .HavePrecision(18, 9);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.UseEncryptionToString(_appSettings);
+
+            modelBuilder.Entity<BASE_AT_HOLIDAY>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_HOLIDAY>(0)
+                .HasValue<AT_HOLIDAY>(1);
+            modelBuilder.Entity<BASE_AT_HOLIDAY_WORKING_DAY>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_HOLIDAY_WORKING_DAY>(0)
+                .HasValue<AT_HOLIDAY_WORKING_DAY>(1);
+            modelBuilder.Entity<BASE_AT_SALARY_PERIOD>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_SALARY_PERIOD>(0)
+                .HasValue<AT_SALARY_PERIOD>(1);
+            modelBuilder.Entity<BASE_AT_SHIFT>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_SHIFT>(0)
+                .HasValue<AT_SHIFT>(1);
+            modelBuilder.Entity<BASE_AT_SHIFT_PATTERN>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_SHIFT_PATTERN>(0)
+                .HasValue<AT_SHIFT_PATTERN>(1);
+            modelBuilder.Entity<BASE_AT_SHIFT_PATTERN_DETAIL>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_SHIFT_PATTERN_DETAIL>(0)
+                .HasValue<AT_SHIFT_PATTERN_DETAIL>(1);
+            modelBuilder.Entity<BASE_AT_SYMBOL>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_SYMBOL>(0)
+                .HasValue<AT_SYMBOL>(1);
+            modelBuilder.Entity<BASE_AT_WORKSIGN>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_WORKSIGN>(0)
+                .HasValue<AT_WORKSIGN>(1);
+            modelBuilder.Entity<BASE_HU_EMPLOYEE>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_EMPLOYEE>(0)
+                .HasValue<HU_EMPLOYEE>(1);
+            modelBuilder.Entity<BASE_HU_EMPLOYEE_CV>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_EMPLOYEE_CV>(0)
+                .HasValue<HU_EMPLOYEE_CV>(1);
+            modelBuilder.Entity<BASE_HU_JOB>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_JOB>(0)
+                .HasValue<HU_JOB>(1);
+            modelBuilder.Entity<BASE_HU_EMPLOYEE>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_EMPLOYEE>(0)
+                .HasValue<HU_EMPLOYEE>(1);
+            modelBuilder.Entity<BASE_HU_ORGANIZATION>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_ORGANIZATION>(0)
+                .HasValue<HU_ORGANIZATION>(1);
+            modelBuilder.Entity<BASE_HU_POSITION>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_POSITION>(0)
+                .HasValue<HU_POSITION>(1);
+            modelBuilder.Entity<BASE_HU_WORKING>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_WORKING>(0)
+                .HasValue<HU_WORKING>(1);
+            modelBuilder.Entity<BASE_HU_NATION>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_NATION>(0)
+                .HasValue<HU_NATION>(1);
+            modelBuilder.Entity<BASE_HU_PROVINCE>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_PROVINCE>(0)
+                .HasValue<HU_PROVINCE>(1);
+            modelBuilder.Entity<BASE_HA_PROVINCE>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HA_PROVINCE>(0)
+                .HasValue<HA_PROVINCE>(1);
+            modelBuilder.Entity<BASE_HU_DISTRICT>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_DISTRICT>(0)
+                .HasValue<HU_DISTRICT>(1);
+            modelBuilder.Entity<BASE_HU_WARD>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_WARD>(0)
+                .HasValue<HU_WARD>(1);
+            modelBuilder.Entity<BASE_HA_WARD>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HA_WARD>(0)
+                .HasValue<HA_WARD>(1);
+            modelBuilder.Entity<BASE_HU_TERMINATE>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_HU_TERMINATE>(0)
+                .HasValue<HU_TERMINATE>(1);
+            modelBuilder.Entity<BASE_AT_ORG_PERIOD>()
+                .HasDiscriminator<int>("Discriminator")
+                .HasValue<BASE_AT_ORG_PERIOD>(0)
+                .HasValue<AT_ORG_PERIOD>(1);
+
+
+            switch (_appSettings.DbType)
+            {
+                case EnumDBType.MSSQL:
+                    modelBuilder.Entity<SYS_OTHER_LIST>(entity =>
+                    {
+                        entity.Property(e => e.NAME_INTL_CODE)
+                        .HasColumnName("NAME_INTL_CODE");
+                    });
+                    modelBuilder.Entity<SYS_MENU>(entity =>
+                    {
+                        entity.ToTable("SYS_MENU", t =>
+                        {
+                            t.HasCheckConstraint("ChkSysMenuModuleIdAndParentIdComposition",
+                                                    "(Parent IS NULL AND ModuleId IS NOT NULL) OR " +
+                                                    "(Parent IS NOT NULL AND ModuleId IS NULL)");
+                        });
+
+                        entity.Property(e => e.CODE)
+                            .IsRequired()
+                            .HasMaxLength(255);
+
+                        entity.HasIndex(e => e.FUNCTION_ID)
+                            .IsUnique()
+                            .HasFilter("[FUNCTION_ID] IS NOT NULL");
+                    });
+
+                    modelBuilder.Entity<SW_PUSH_SUBSCRIPTION>(entity =>
+                    {
+                        entity.Property(e => e.APP_ID).HasColumnType("VARCHAR(36)");
+                        entity.Property(e => e.USER_ID).HasColumnType("VARCHAR(36)");
+                        entity.Property(e => e.ENDPOINT).HasColumnType("VARCHAR(255)");
+                    });
+                    modelBuilder.Entity<AT_HOLIDAY>(entity =>
+                    {
+                        entity.Property(e => e.START_DAYOFF).HasColumnType("DATETIME2(7)");
+
+                        entity.ToTable("AT_HOLIDAY", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtHolidayStartDayoffZerotime",
+                                "CAST(START_DAYOFF AS TIME) = '00:00:00.0000000'");
+                        });
+                    });
+                    modelBuilder.Entity<AT_HOLIDAY>(entity =>
+                    {
+                        entity.Property(e => e.END_DAYOFF).HasColumnType("DATETIME2(7)");
+
+                        entity.ToTable("AT_HOLIDAY", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtHolidayStartDayoffZerotime",
+                                "CAST(END_DAYOFF AS TIME) = '00:00:00.0000000'");
+                        });
+                    });
+                    modelBuilder.Entity<AT_SALARY_PERIOD>(entity =>
+                    {
+                        entity.Property(e => e.START_DATE).HasColumnType("DATETIME2(7)");
+
+                        entity.ToTable("AT_SALARY_PERIOD", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtSalaryPeriodStartDateZerotime",
+                                "CAST(START_DATE AS TIME) = '00:00:00.0000000'");
+                        });
+                    });
+                    modelBuilder.Entity<AT_SALARY_PERIOD>(entity =>
+                    {
+                        entity.Property(e => e.END_DATE).HasColumnType("DATETIME2(7)");
+
+                        entity.ToTable("AT_SALARY_PERIOD", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtSalaryPeriodEndDateZerotime",
+                                "CAST(END_DATE AS TIME) = '00:00:00.0000000'");
+                        });
+                    });
+                    modelBuilder.Entity<AT_HOLIDAY_WORKING_DAY>(entity =>
+                    {
+                        entity.Property(e => e.WORKING_DAY).HasColumnType("DATETIME2(7)");
+
+                        entity.ToTable("AT_HOLIDAY_WORKING_DAY", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtHolidayWorkingDaysWorkingDayZerotime",
+                                "CAST(WORKING_DAY AS TIME) = '00:00:00.0000000'");
+                        });
+                    });
+                    modelBuilder.Entity<AT_WORKSIGN>(entity =>
+                    {
+                        entity.Property(e => e.WORKINGDAY).HasColumnType("DATETIME2(7)");
+
+                        entity.ToTable("AT_WORKSIGN", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtWorksignWorkingdayZerotime",
+                                "CAST(WORKINGDAY AS TIME) = '00:00:00.0000000'");
+                        });
+                    });
+
+
+                    break;
+
+                case EnumDBType.ORACLE:
+                    modelBuilder.Entity<SYS_OTHER_LIST>(entity =>
+                    {
+                        entity.Property(e => e.NAME_INTL_CODE)
+                        .HasColumnName("NAME_INTL_CODE");
+                    });
+                    modelBuilder.Entity<SYS_MENU>(entity =>
+                    {
+                        entity.ToTable("SYS_MENU", t =>
+                        {
+                            t.HasCheckConstraint("ChkSysMenuModuleIdAndParentIdComposition",
+                                                    "(Parent IS NULL AND ModuleId IS NOT NULL) OR " +
+                                                    "(Parent IS NOT NULL AND ModuleId IS NULL)");
+                        });
+
+                        entity.Property(e => e.CODE)
+                            .IsRequired()
+                            .HasMaxLength(255);
+
+
+                    });
+
+                    modelBuilder.Entity<SW_PUSH_SUBSCRIPTION>(entity =>
+                    {
+                        entity.Property(e => e.APP_ID).HasColumnType("VARCHAR2(36)");
+                        entity.Property(e => e.USER_ID).HasColumnType("VARCHAR2(36)");
+                        entity.Property(e => e.ENDPOINT).HasColumnType("VARCHAR2(255)");
+                    });
+                    modelBuilder.Entity<AT_HOLIDAY>(entity =>
+                    {
+                        entity.Property(e => e.START_DAYOFF).HasColumnType("TIMESTAMP");
+
+                        entity.ToTable("AT_HOLIDAY", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtHolidayStartDayoffZerotime",
+                                "START_DAYOFF = TRUNC(START_DAYOFF)");
+                        });
+                    });
+                    modelBuilder.Entity<AT_HOLIDAY>(entity =>
+                    {
+                        entity.Property(e => e.END_DAYOFF).HasColumnType("TIMESTAMP");
+
+                        entity.ToTable("AT_HOLIDAY", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtHolidayEndDayoffZerotime",
+                                "END_DAYOFF = TRUNC(END_DAYOFF)");
+                        });
+                    });
+                    modelBuilder.Entity<AT_SALARY_PERIOD>(entity =>
+                    {
+                        entity.Property(e => e.START_DATE).HasColumnType("TIMESTAMP");
+
+                        entity.ToTable("AT_SALARY_PERIOD", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtSalaryPeriodStartDateZerotime",
+                                "START_DATE = TRUNC(START_DATE)");
+                        });
+                    });
+                    modelBuilder.Entity<AT_SALARY_PERIOD>(entity =>
+                    {
+                        entity.Property(e => e.END_DATE).HasColumnType("TIMESTAMP");
+
+                        entity.ToTable("AT_SALARY_PERIOD", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtSalaryPeriodEndDateZerotime",
+                                "END_DATE = TRUNC(END_DATE)");
+                        });
+                    });
+                    modelBuilder.Entity<AT_HOLIDAY_WORKING_DAY>(entity =>
+                    {
+                        entity.Property(e => e.WORKING_DAY).HasColumnType("TIMESTAMP");
+
+                        entity.ToTable("AT_HOLIDAY_WORKING_DAY", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtHolidayWorkingDaysWorkingDayZerotime",
+                                "WORKING_DAY = TRUNC(WORKING_DAY)");
+                        });
+                        entity.HasOne(p => p.AtHoliday)
+                          .WithMany(b => b.AtHolidayWorkingDays)
+                          .HasForeignKey(p => p.HOLIDAY_ID)
+                          .OnDelete(DeleteBehavior.Cascade);
+                    });
+                    modelBuilder.Entity<AT_WORKSIGN>(entity =>
+                    {
+                        entity.Property(e => e.WORKINGDAY).HasColumnType("TIMESTAMP");
+
+                        entity.ToTable("AT_WORKSIGN", t =>
+                        {
+                            t.HasCheckConstraint("ChkAtWorksignWorkingdayZerotime",
+                                "WORKINGDAY = TRUNC(WORKINGDAY)");
+                        });
+                    });
+
+
+                    break;
+                case EnumDBType.POSTGRESQL:
+                    // Lowercase table/column/schema names
+                    foreach (var entity in modelBuilder.Model.GetEntityTypes())
+                    {
+                        entity.SetTableName(entity.GetTableName()?.ToLower());
+                        if (entity.GetSchema() != null)
+                            entity.SetSchema(entity.GetSchema()!.ToLower());
+
+                        foreach (var property in entity.GetProperties())
+                            property.SetColumnName(property.Name.ToLower());
+
+                        foreach (var key in entity.GetKeys())
+                            key.SetName(key.GetName()?.ToLower());
+
+                        foreach (var fk in entity.GetForeignKeys())
+                            fk.SetConstraintName(fk.GetConstraintName()?.ToLower());
+
+                        foreach (var index in entity.GetIndexes())
+                            index.SetDatabaseName(index.GetDatabaseName()?.ToLower());
+                    }
+                    break;
+            }
+
+        }
+
+        public async Task<int> SaveChangesAsync() => await base.SaveChangesAsync();
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //optionsBuilder.EnableSensitiveDataLogging();
+
+            //optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+
+           /*****************************************************
+           * The interceptor will be ignored when a query is fomulated without .TagWith(EfCoreTag.DETECT_SYNC_CODE) or in Production
+           * Warning: Do not make a lot of changes during the interceptor opened. Update a litle correction day-by-day
+           ******************************************************/
+            var interceptor = _serviceProvider.GetRequiredService<DbSyncCodeDetectorInterceptor>();
+            optionsBuilder.AddInterceptors(interceptor);
+
+            if (_appSettings.DbType == EnumDBType.MSSQL)
+            {
+                if (!_appSettings.ConnectionStrings.CoreDb.CoreDecrypt().Contains("Initial Catalog"))
+                {
+                    throw new Exception("The ConnectionString is not for MS SQL");
+                }
+                else
+                {
+                    optionsBuilder.UseSqlServer(_appSettings.ConnectionStrings.CoreDb.CoreDecrypt(), o => o.UseCompatibilityLevel(120));
+
+                }
+            }
+            else if (_appSettings.DbType == EnumDBType.ORACLE)
+            {
+                if (!_appSettings.ConnectionStrings.CoreDb.CoreDecrypt().Contains("DESCRIPTION"))
+                {
+                    throw new Exception("The ConnectionString is not for ORACLE");
+                }
+                else
+                {
+                    // For Oracle, make sure the User ID is created before running
+                    optionsBuilder.UseOracle(_appSettings.ConnectionStrings.CoreDb.CoreDecrypt());
+                }
+            }
+
+        }
+    }
+}

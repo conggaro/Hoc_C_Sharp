@@ -1,0 +1,13 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace API.Entities;
+[Table("BANG_DON_DANG_KY_NGHI")]
+public class BANG_DON_DANG_KY_NGHI
+{
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long ID { get; set; }
+    public long? EMPLOYEE_ID { get; set; }
+    public long? STATUS_ID { get; set; }
+    public int? INITIALIZE_LEVEL { get; set; }
+    public int? TARGET_LEVEL { get; set; }
+}

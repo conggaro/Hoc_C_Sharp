@@ -1,0 +1,186 @@
+/// <summary>
+/// Hàm lấy ra quản lý theo cấp của nhân viên
+/// Hướng dẫn sử dụng:
+/// nếu muốn lấy quản lý cấp 1 thì truyền initializeLevel = 0, targetLevel = 1
+/// nếu muốn lấy quản lý cấp 2 thì truyền initializeLevel = 0, targetLevel = 2
+/// </summary>
+public async Task<FormatedResponse> GetManagerByEmployee(long employeeId, int initializeLevel, int targetLevel)
+{
+    try
+    {
+        if (initializeLevel == targetLevel)
+        {
+            return new() { InnerBody = employeeId };
+        }
+
+        var getEmp = await _dbContext.HuEmployees.AsNoTracking().FirstOrDefaultAsync(x => x.ID == employeeId) ?? throw new("EMPLOYEE_NOT_FOUND");
+
+        var getPos = await _dbContext.HuPositions.AsNoTracking().FirstOrDefaultAsync(x => x.ID == getEmp.POSITION_ID) ?? throw new("EMPLOYEE_POSITION_NOT_FOUND");
+
+        var getManagerPos = await _dbContext.HuPositions.AsNoTracking().FirstOrDefaultAsync(x => x.ID == getPos.LM) ?? throw new("MANAGER_POSITION_NOT_FOUND");
+
+        var getManagerEmp = await _dbContext.HuEmployees.AsNoTracking().FirstOrDefaultAsync(x => x.ID == getManagerPos.MASTER) ?? throw new("MANAGER_NOT_FOUND");
+
+        initializeLevel++;
+
+        return await GetManagerByEmployee(getManagerEmp.ID, initializeLevel, targetLevel);
+    }
+    catch (Exception ex)
+    {
+        return ex.ToFormatedResponse();
+    }
+}
+
+/// <summary>
+/// Hàm tạo đơn đăng ký nghỉ
+/// </summary>
+public async Task<FormatedResponse> AddRegisterLeave(long employeeId)
+{
+    try
+    {
+        // lấy ra cấp duyệt theo cấu hình
+        var levelApprove = await _dbContext.BangCauHinhCapQuanLyDuyets.AsNoTracking()
+                            .FirstOrDefaultAsync(x => x.CODE == "LEAVE") ?? throw new("LEVEL_APPROVE_NOT_FOUND");
+
+        BANG_DON_DANG_KY_NGHI obj = new()
+        {
+            ID = 0,
+            EMPLOYEE_ID = employeeId,
+            STATUS_ID = 993, // chờ duyệt nhưng để tạm id cứng
+            INITIALIZE_LEVEL = 0,
+            TARGET_LEVEL = levelApprove.LEVEL_MANAGER_FOR_APPROVE
+        };
+
+        _dbContext.BangDonDangKyNghis.Add(obj);
+        await _dbContext.SaveChangesAsync();
+
+        return new() { InnerBody = "Tạo mới thành công" };
+    }
+    catch (Exception ex)
+    {
+        return ex.ToFormatedResponse();
+    }
+}
+
+/// <summary>
+/// Lấy đơn cho quản lý duyệt
+/// </summary>
+public async Task<FormatedResponse> GetRegisterLeaveForManager(long managerId)
+{
+    try
+    {
+        // lấy ra cấu hình cấp duyệt
+        var levelApprove = await _dbContext.BangCauHinhCapQuanLyDuyets.AsNoTracking()
+                            .FirstOrDefaultAsync(x => x.CODE == "LEAVE") ?? throw new("LEVEL_APPROVE_NOT_FOUND");
+
+        // lấy tất cả các đơn lên
+        var list = await _dbContext.BangDonDangKyNghis.AsNoTracking()
+                    .Where(x =>
+                        x.STATUS_ID == 993 // chờ duyệt nhưng để tạm id cứng
+
+                        // cái target level phải nhỏ hơn hoặc bằng cấp duyệt cao nhất
+                        // để định vị đến đúng quản lý
+                        && x.TARGET_LEVEL <= levelApprove.LEVEL_MANAGER_FOR_APPROVE
+                    )
+                    .ToListAsync();
+
+        // khởi tạo list đơn cho quản lý
+        List<BANG_DON_DANG_KY_NGHI> listForManager = [];
+
+        foreach (var item in list)
+        {
+            // lấy ra quản lý của đơn hiện tại theo cấp duyệt
+            var manager = await GetManagerByEmployee(item.EMPLOYEE_ID ?? 0, item.INITIALIZE_LEVEL ?? 0, item.TARGET_LEVEL ?? 0);
+            
+            if (manager.ErrorType != EnumErrorType.NONE) continue;
+
+            long managerIdOfEmp = (long)manager.InnerBody!;
+
+            // nếu quản lý của nhân viên trùng với quản lý đang đăng nhập thì thêm vào list duyệt
+            if (managerIdOfEmp == managerId)
+            {
+                listForManager.Add(item);
+            }
+        }
+
+        return new()
+        {
+            InnerBody = listForManager
+        };
+    }
+    catch (Exception ex)
+    {
+        return ex.ToFormatedResponse();
+    }
+}
+
+/// <summary>
+/// Hàm duyệt đơn đăng ký nghỉ
+/// </summary>
+public async Task<FormatedResponse> ApproveRegisterLeave(List<long>? ids, long? managerId)
+{
+    try
+    {
+        if (ids != null && ids.Any())
+        {
+            // lấy ra danh sách đơn đăng ký nghỉ theo ids
+            var list = await _dbContext.BangDonDangKyNghis
+                        .Where(x => ids.Contains(x.ID))
+                        .ToListAsync();
+
+            if (list != null && list.Any())
+            {
+                // lấy ra cấu hình cấp duyệt
+                var levelApprove = await _dbContext.BangCauHinhCapQuanLyDuyets.AsNoTracking()
+                                    .FirstOrDefaultAsync(x => x.CODE == "LEAVE") ?? throw new("LEVEL_APPROVE_NOT_FOUND");
+
+                foreach (var item in list)
+                {
+                    // nếu quản lý trực tiếp là chính mình luôn
+                    // thì duyệt luôn không cần kiểm tra cấp
+                    var managerContext = await GetManagerByEmployee(managerId ?? 0, 0, 1);
+                    if (managerContext.ErrorType == EnumErrorType.NONE)
+                    {
+                        item.STATUS_ID = 994; // đã duyệt nhưng để tạm id cứng
+                        await _dbContext.SaveChangesAsync();
+
+                        // nếu ghi log thì ghi log ở đây
+
+                        // nếu thêm hàm thông báo mobile Firebase cloud hay hàm xử lý gì nữa thì thêm ở đây
+
+                        continue;
+                    }
+
+
+                    // khi duyệt thì kiểm tra xem đã đến cấp duyệt cuối chưa
+                    if ((item.TARGET_LEVEL ?? 0) < levelApprove.LEVEL_MANAGER_FOR_APPROVE)
+                    {
+                        // chưa đến cấp cuối thì tăng cấp duyệt lên 1
+                        item.TARGET_LEVEL = (item.TARGET_LEVEL ?? 0) + 1;
+
+                        // nếu ghi log thì ghi log ở đây
+
+                        // nếu thêm hàm thông báo mobile Firebase cloud hay hàm xử lý gì nữa thì thêm ở đây
+                    }
+                    else
+                    {
+                        // đã đến cấp cuối thì duyệt xong, cập nhật trạng thái đã duyệt
+                        item.STATUS_ID = 994; // đã duyệt nhưng để tạm id cứng
+
+                        // nếu ghi log thì ghi log ở đây
+
+                        // nếu thêm hàm thông báo mobile Firebase cloud hay hàm xử lý gì nữa thì thêm ở đây
+                    }
+
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+        }
+
+        return new() { MessageCode = "Phê duyệt thành công" };
+    }
+    catch (Exception ex)
+    {
+        return ex.ToFormatedResponse();
+    }
+}

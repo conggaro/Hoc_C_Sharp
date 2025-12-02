@@ -1,0 +1,12 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace API.Entities;
+[Table("BANG_CAU_HINH_CAP_QUAN_LY_DUYET")]
+public class BANG_CAU_HINH_CAP_QUAN_LY_DUYET
+{
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public long ID { get; set; }
+    public string? CODE { get; set; }
+    public string? NAME { get; set; }
+    public int? LEVEL_MANAGER_FOR_APPROVE { get; set; }
+}
