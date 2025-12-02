@@ -1,3 +1,6 @@
+# Tinh túy
+Khi không biết câu lệnh này là gì, thì phải hỏi câu lệnh này trả về giá trị gì, thì đấy là tác dụng của câu lệnh
+
 # Câu lệnh git hay dùng
 <pre>câu lệnh kiểm tra nhánh
 git branch
