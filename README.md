@@ -1,6 +1,14 @@
 # Tinh túy
 Khi không biết câu lệnh này là gì, thì phải hỏi câu lệnh này trả về giá trị gì, thì đấy là tác dụng của câu lệnh
 
+# Câu lệnh tìm thư mục chứa API.exe
+<pre>Cách 1:
+nssm edit Service_của_bạn_Kestrel
+
+
+Cách 2:
+nssm get Service_của_bạn_Kestrel Application</pre>
+
 # Câu lệnh git hay dùng
 <pre>câu lệnh kiểm tra nhánh
 git branch
