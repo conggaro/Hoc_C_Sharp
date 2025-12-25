@@ -1,0 +1,57 @@
+tạo file .bat để call api bằng cmd
+cách chạy thì chỉ cần click đúp vào là xong
+
+
+khai báo thì sao
+token thì tùy chỉnh
+ví dụ: set TOKEN=eyJhbGciOiJIU........
+
+đây là call api loại GET
+
+REM ------------------------------------------------- copy cái đoạn này vào ----------------------------------------------------------
+@echo off
+set TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBUeXBlIjoiV0VCQVBQIiwiVXNlckdyb3VwSWQiOiIxIiwic2lkIjoiZmFiYmEzN2ItMWVlYi00ODEyLWFkNmUtMzk0MDI1ZDFkYmQ2IiwidHlwIjoiY29uZ25jIiwiaWF0IjoiMzQ2MDAiLCJJc0FkbWluIjoiVHJ1ZSIsIklzUm9vdCI6IlRydWUiLCJleHAiOjE3NjY3MTY4ODcsImlzcyI6Ikhpc3RhZmYgY3VzdG9tZXIiLCJhdWQiOiJIaXN0YWZmIGN1c3RvbWVyIn0.av3xne_kt0AllIhouvt0bxJk9FCaMs7B8YlJbXpRQFI
+
+curl https://localhost:44359/api/AtTimeTimesheetDaily/CalAttendanceDaily ^
+-H "Authorization: Bearer %TOKEN%" ^
+-H "Content-Type: application/json"
+
+pause
+REM ------------------------------------------------- copy cái đoạn này vào ----------------------------------------------------------
+
+
+
+
+
+
+nếu muốn call api post
+việc 1 tạo file body.json
+{
+  "name": "An",
+  "date": "2025-12-25T14:30:15"
+}
+
+
+việc 2:
+tạo file call_api_post.bat
+
+bên trong khai báo như này
+REM Khai bao bearer token
+
+@echo off
+set TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBUeXBlIjoiV0VCQVBQIiwiVXNlckdyb3VwSWQiOiIxIiwic2lkIjoiZmFiYmEzN2ItMWVlYi00ODEyLWFkNmUtMzk0MDI1ZDFkYmQ2IiwidHlwIjoiY29uZ25jIiwiaWF0IjoiMzQ2MDAiLCJJc0FkbWluIjoiVHJ1ZSIsIklzUm9vdCI6IlRydWUiLCJleHAiOjE3NjY3MTY4ODcsImlzcyI6Ikhpc3RhZmYgY3VzdG9tZXIiLCJhdWQiOiJIaXN0YWZmIGN1c3RvbWVyIn0.av3xne_kt0AllIhouvt0bxJk9FCaMs7B8YlJbXpRQFI
+
+
+REM Gọi API POST với body từ file JSON
+
+curl -X POST https://localhost:44359/api/AtTimeTimesheetDaily/CalAttendanceDaily ^
+-H "Authorization: Bearer %TOKEN%" ^
+-H "Content-Type: application/json" ^
+-d @C:\Users\Administrator\Music\body.json
+
+pause
+
+
+thường thì chỉ cần sửa TOKEN
+với sửa api
+với địa chỉ chứa file body.json là được
