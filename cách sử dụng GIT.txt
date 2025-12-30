@@ -1,0 +1,70 @@
+1. Xem danh sách nhánh cục bộ (Local)
+git branch
+
+
+2. Xem danh sách nhánh trên Server (Remote)
+git branch -r
+
+
+3. Xem tất cả các nhánh (Cả Local và Remote)
+git branch -a
+
+
+4. Xem thêm thông tin chi tiết (Verbose)
+Nếu bạn muốn biết mỗi nhánh đang nằm ở commit nào
+và nội dung commit gần nhất là gì, hãy thêm cờ -v:
+git branch -r -v
+
+
+5. Kiểm tra các nhánh đã hoặc chưa gộp (Merged)
+câu lệnh này để view
+git branch -r --merged
+
+
+6. Câu lệnh tạo nhánh trên server
+Bước 1: Tạo và chuyển sang nhánh đó ở máy bạn (Local)
+git checkout -b congnc_TVC_HN
+
+Bước 2: Đẩy nhánh này lên Server và thiết lập theo dõi (Tracking)
+git push -u origin congnc_TVC_HN
+
+
+Tại sao nên dùng thêm tham số -u?
+Tham số -u (hoặc --set-upstream) cực kỳ quan trọng.
+Nó giúp Git "ghi nhớ" rằng nhánh congnc_TVC_HN ở máy bạn
+sẽ kết nối trực tiếp với nhánh cùng tên trên server.
+
+Từ lần sau, khi đang ở nhánh này,
+bạn chỉ cần gõ git push hoặc git pull là xong,
+không cần gõ lại tên nhánh dài dòng nữa.
+
+
+---- //// Cách kiểm tra xem đã lên server chưa /// -----
+git branch -r
+
+
+
+XÓA NHÁNH TRÊN SERVER (NẾU CÓ QUYỀN)
+git push origin --delete congnc_TVC_HN
+
+
+XÓA NHÁNH TRÊN LOCAL
+git branch -D congnc_TVC_HN
+
+
+Mẹo: Lệnh "quét sạch" tàn dư
+Sau khi bạn hoặc đồng nghiệp xóa nhánh trên server,
+máy của bạn vẫn có thể còn lưu "vết" (references)
+của các nhánh cũ khi bạn gõ git branch -a.
+Để dọn dẹp các vết này, hãy dùng lệnh:
+git fetch --prune
+
+
+Những lưu ý "sống còn" khi xóa nhánh Local
+Không thể xóa nhánh khi đang đứng ở chính nó:
+Bạn không thể "tự chặt chân mình".
+Nếu muốn xóa nhánh A,
+bạn phải chuyển sang nhánh main hoặc một nhánh khác trước:
+
+git checkout main
+git branch -d congnc_TVC_HN
