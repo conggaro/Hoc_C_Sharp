@@ -1,0 +1,21 @@
+1. tree – xem cấu trúc dạng cây (phổ biến nhất)
+tree
+
+
+Nếu muốn xem kèm cả file:
+tree /f
+
+  
+Nếu muốn dùng ký tự ASCII (dễ copy):
+tree /a
+tree /f /a
+
+
+2. dir /s – liệt kê thư mục và file theo dạng danh sách
+dir /s
+
+
+3. Xuất cấu trúc ra file (rất tiện)
+tree /f /a > C:\cautruc_thumuc.txt
+
+  nhớ mở CMD với quyền ADMIN
