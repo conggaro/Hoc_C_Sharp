@@ -1,0 +1,86 @@
+===========================================================================
+HƯỚNG DẪN CHI TIẾT TẠO DỰ ÁN C# CONSOLE APP VỚI EF CORE MIGRATION
+===========================================================================
+
+Dựa trên thực tế dự án: Local_Migration2
+Phiên bản .NET sử dụng: 10.0
+Hệ quản trị CSDL: SQL Server (localhost)
+
+---------------------------------------------------------------------------
+BƯỚC 1: KHỞI TẠO DỰ ÁN (PROJECT)
+---------------------------------------------------------------------------
+1. Tạo thư mục chứa dự án:
+   mkdir Local_Migration2
+   cd Local_Migration2
+
+2. Tạo dự án Console:
+   dotnet new console
+
+---------------------------------------------------------------------------
+BƯỚC 2: CÀI ĐẶT THƯ VIỆN NUGET (PACKAGES)
+---------------------------------------------------------------------------
+Chạy 2 lệnh sau để cài đặt thư viện kết nối SQL Server và hỗ trợ Migration:
+
+1. Thư viện SQL Server:
+   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+
+2. Thư viện hỗ trợ Design/Migration:
+   dotnet add package Microsoft.EntityFrameworkCore.Design
+
+---------------------------------------------------------------------------
+BƯỚC 3: CÀI ĐẶT CÔNG CỤ HỖ TRỢ (TOOLS)
+---------------------------------------------------------------------------
+Đây là bước quan trọng để máy tính hiểu được lệnh "dotnet ef":
+
+1. Cài đặt dotnet-ef (chỉ cần làm 1 lần trên máy tính):
+   dotnet tool install --global dotnet-ef
+
+2. Cập nhật nếu đã có bản cũ:
+   dotnet tool update --global dotnet-ef
+
+* Lưu ý: Nếu cài xong mà gõ lệnh không nhận, hãy tắt CMD và mở lại.
+
+---------------------------------------------------------------------------
+BƯỚC 4: THIẾT LẬP MÃ NGUỒN (CODE)
+---------------------------------------------------------------------------
+Trong file Program.cs, cần có 3 thành phần chính:
+1. Class Model (Ví dụ: class User { Id, Name... })
+2. Class DbContext (Quản lý kết nối SQL)
+3. Chuỗi kết nối (Connection String) đúng định dạng:
+   "Server=localhost;Database=TenDB;User Id=sa;Password=123456;TrustServerCertificate=True;"
+
+---------------------------------------------------------------------------
+BƯỚC 5: CÁC LỆNH MIGRATION QUAN TRỌNG
+---------------------------------------------------------------------------
+Thực hiện tại thư mục gốc của dự án (nơi có file .csproj):
+
+1. Tạo kịch bản Migration (Generate):
+   Lệnh: dotnet ef migrations add <TenMigration>
+   Ví dụ: dotnet ef migrations add InitialCreate
+   => Kết quả: Tạo ra thư mục /Migrations trong dự án.
+
+2. Đẩy cấu trúc vào SQL Server (Update Database):
+   Lệnh: dotnet ef database update
+   => Kết quả: Tạo Database và các bảng thực tế trong SQL Server.
+
+3. Xóa Migration cuối cùng (nếu làm sai):
+   Lệnh: dotnet ef migrations remove
+
+---------------------------------------------------------------------------
+BƯỚC 6: CHẠY VÀ KIỂM TRA
+---------------------------------------------------------------------------
+1. Biên dịch và chạy ứng dụng:
+   dotnet run
+
+2. Dọn dẹp các file rác (bin/obj) trước khi đóng gói/gửi code:
+   dotnet clean
+
+---------------------------------------------------------------------------
+GHI CHÚ VỀ CẤU TRÚC THƯ MỤC
+---------------------------------------------------------------------------
+- GIỮ LẠI: Program.cs, .csproj, thư mục Migrations.
+- CÓ THỂ XÓA: bin, obj (Sẽ tự tạo lại khi chạy 'dotnet run').
+- THƯ VIỆN LƯU Ở ĐÂU: 
+  + Danh sách lưu trong file .csproj.
+  + File thực tế lưu tại: %USERPROFILE%\.nuget\packages
+===========================================================================
