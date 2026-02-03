@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "API Debug (.NET)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "C:\\Program Files\\dotnet\\dotnet.exe",
+      "args": [
+        "${workspaceFolder}/API/bin/Debug/net9.0/API.dll"
+      ],
+      "cwd": "${workspaceFolder}/API",
+      "stopAtEntry": true,
+      "justMyCode": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}

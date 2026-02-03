@@ -1,0 +1,71 @@
+Các bước để chạy được code Web API C# trên Visual Studio Code
+và Debug được luôn
+
+1. check công cụ môi trường phát phát triển SDK
+gõ CMD
+dotnet --list-sdks
+
+2. thêm file
+global.json
+trong thư mục cùng cấp với HISTAFF_API.sln
+
+3. thêm thư mục
+.vscode
+
+4. thêm 2 file
+tasks.json
+launch.json
+
+5. sửa file
+API.csproj
+
+
+6. chạy lệnh cmd
+vị trí là ở ngoài thư mục API
+
+C:\Users\CongPC\Videos\DuAn_PVN\DuAn_OM\pvn-fed-appdomain>dotnet clean API\API.csproj
+C:\Users\CongPC\Videos\DuAn_PVN\DuAn_OM\pvn-fed-appdomain>dotnet restore API\API.csproj
+C:\Users\CongPC\Videos\DuAn_PVN\DuAn_OM\pvn-fed-appdomain>dotnet build API\API.csproj
+
+
+7. sau khi chạy xong
+thì bấm RUN AND DEBUG trong visual code
+
+8. nếu muốn đặt break point thì bấm F9
+nếu muốn step over thì bấm F10
+nếu muốn step into thì bấm F11
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
+khi sửa file API.csproj
+
+thêm đoạn code này
+<PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+</PropertyGroup>
+
+
+
+sửa cái này
+<SelfContained>false</SelfContained>
+
+
+
+
+sửa cái này nữa
+có thể đem ra compare text online
+cho dễ phân biệt sự khác biệt
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+    <DebugType>Full</DebugType>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>True</Deterministic>
+    <NoWarn>1701;1702;1591</NoWarn>
+</PropertyGroup>
