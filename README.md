@@ -356,6 +356,9 @@ public class Example
 <pre>Dùng lệnh sau đây để kiểm tra trên 2 máy là server và máy build hiện tại
 dotnet --list-runtimes
 
+kiểm tra môi trường SDK (rất quan trọng đấy)
+dotnet --list-sdks
+
 sau đó kiểm tra file API.runtimeconfig.json
 xem có khớp với phiên bản runtime trên server không
 
