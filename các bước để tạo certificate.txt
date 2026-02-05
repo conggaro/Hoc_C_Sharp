@@ -1,0 +1,91 @@
+các bước để tạo certificate.pfx
+
+nhớ chạy bằng power shell
+quyền ADMIN
+
+bước 1:
+cài đặt openssl
+
+có thể vào web này để tải
+https://slproweb.com/products/Win32OpenSSL.html
+
+
+bước 2:
+sau khi tải xong thì thiết lập biến môi trường environment variables
+chỗ system variables
+thì thêm vào trong bản ghi path
+
+thêm xong các kiểu thì bấm ok
+
+bước 3:
+điều hướng vào thư mục C:\Users\CongPC\certs
+thư mục khác ổ C là được
+
+
+bước 4:
+ví dụ đang đứng ở
+C:\Users\CongPC\certs
+
+bước 5:
+XÓA cert cũ (nếu có)
+del key.pem -Force -ErrorAction SilentlyContinue
+del cert.pem -Force -ErrorAction SilentlyContinue
+del certificate.pfx -Force -ErrorAction SilentlyContinue
+
+
+bước 6:
+TẠO cert mới 5 NĂM (1825 ngày)
+openssl req -x509 -newkey rsa:4096 -nodes -days 1825 `
+  -keyout key.pem `
+  -out cert.pem
+
+
+bước 7:
+KIỂM TRA NGÀY (bắt buộc)
+openssl x509 -in cert.pem -noout -dates
+
+
+kết quả mong đợi
+PS C:\Users\CongPC\certs> dir C:\certificate.pfx | fl CreationTime,LastWriteTime,Length
+>>
+CreationTime  : 05/02/2026 11:15:39 AM
+LastWriteTime : 05/02/2026 11:15:39 AM
+Length        : 4355
+
+
+
+bước 8:
+TẠO certificate.pfx (5 năm)
+openssl pkcs12 -export -out certificate.pfx -inkey key.pem -in cert.pem
+
+
+bước 9:
+(Tuỳ chọn) 📂 Đưa .pfx ra C:\
+
+Move-Item .\certificate.pfx C:\ -Force
+takeown /f C:\certificate.pfx
+icacls C:\certificate.pfx /inheritance:e
+icacls C:\certificate.pfx /grant CongPC:F
+
+
+
+
+KẾT QUẢ CUỐI
+
+✔️ Cert mới 5 năm
+
+✔️ Hết hạn ~ 02/2031
+
+✔️ Không dính cert cũ
+
+✔️ Không lỗi permission
+
+
+
+
+nếu check ở trên trình duyệt vẫn chưa thấy hạn đến 2031
+thì stop service kestrel điều
+xong rồi start lại
+xong rồi check lại
+Ctrl + shift + R nữa
+cho chắc chắn hết cache
