@@ -1,6 +1,9 @@
 # Tinh túy
 Khi không biết câu lệnh này là gì, thì phải hỏi câu lệnh này trả về giá trị gì, thì đấy là tác dụng của câu lệnh
 
+# Tạo service Kestrel
+nssm install AlphaKestrel
+
 # Câu lệnh tìm thư mục chứa API.exe
 <pre>Cách 1:
 nssm edit Service_của_bạn_Kestrel
