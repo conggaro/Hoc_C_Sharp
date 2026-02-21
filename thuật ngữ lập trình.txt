@@ -18,3 +18,6 @@ aggregate root rễ tổng hợp
 mapping layer kết nối theo tầng ứng dụng
 
 strict separation sự tách biệt nghiêm ngặt
+
+
+blueprint bản thiết kế
