@@ -21,3 +21,5 @@ strict separation sự tách biệt nghiêm ngặt
 
 
 blueprint bản thiết kế
+
+Infrastructure (Persistence Layer) Cơ sở hạ tầng (Lớp lưu trữ dữ liệu)
