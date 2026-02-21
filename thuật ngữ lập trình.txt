@@ -16,3 +16,5 @@ tôi sẽ hướng dẫn bạn refactor chuẩn aggregate root + mapping layer.
 aggregate root rễ tổng hợp
 
 mapping layer kết nối theo tầng ứng dụng
+
+strict separation sự tách biệt nghiêm ngặt
