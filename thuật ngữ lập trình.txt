@@ -27,3 +27,6 @@ Infrastructure (Persistence Layer) Cơ sở hạ tầng (Lớp lưu trữ dữ l
 
 Clean DDD 
 Clean DDD là viết tắt của Clean Domain-Driven Design – tức là cách áp dụng Domain-Driven Design theo phong cách kiến trúc “clean”.
+
+
+production-grade cấp độ sản xuất
