@@ -23,3 +23,7 @@ strict separation sự tách biệt nghiêm ngặt
 blueprint bản thiết kế
 
 Infrastructure (Persistence Layer) Cơ sở hạ tầng (Lớp lưu trữ dữ liệu)
+
+
+Clean DDD 
+Clean DDD là viết tắt của Clean Domain-Driven Design – tức là cách áp dụng Domain-Driven Design theo phong cách kiến trúc “clean”.
