@@ -1,2 +1,8 @@
 skeleton khung xương
 enterprise doanh nghiệp
+
+maturity level mức độ trưởng thành
+
+
+Intermediate backend developer
+Lập trình viên backend trình độ trung cấp
