@@ -1,0 +1,21 @@
+ví dụ dự án là MyApp.API.dll
+
+thì gõ lệnh này để chạy
+dotnet MyApp.API.dll
+
+
+nếu tắt thì Ctrl + C
+
+
+thì xem có cái nào chạy ở cổng 5000 không
+mở cmd
+netstat -ano | findstr :5000
+
+
+nếu có thì tìm 
+xong r tắt như này
+
+số 12345 là PID
+sau khi gõ lệnh tìm netstat -ano | findstr :5000
+
+taskkill /PID 12345 /F
