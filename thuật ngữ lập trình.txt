@@ -30,3 +30,6 @@ Clean DDD là viết tắt của Clean Domain-Driven Design – tức là cách 
 
 
 production-grade cấp độ sản xuất
+
+
+Modular Monolith trend của năm 2026
