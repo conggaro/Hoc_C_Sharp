@@ -885,3 +885,6 @@ Bạn có muốn mình viết cho bạn một helper extension method để test
 git blame example.cs
 <br>
 git blame <filename>
+
+# Chuỗi kết nối connection string SQL Server
+TrustServerCertificate=True;Password=123456;Persist Security Info=True;User ID=sa;Initial Catalog=QL_SanPham;Data Source=localhost
