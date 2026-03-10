@@ -1,0 +1,730 @@
+Sau khi máy tính đã có IP của website, nó vẫn chưa vào được web ngay. Nó phải làm 2 việc quan trọng:
+
+1️⃣ Tìm đường đi trên Internet → Routing
+2️⃣ Thiết lập kết nối với server → TCP handshake
+
+1️⃣ Routing – tìm đường đến server 🌐
+
+Internet giống như mạng lưới rất nhiều router.
+
+Máy tính của bạn sẽ:
+
+Gửi gói tin tới router trong mạng nhà
+
+Router này chuyển tiếp tới router của ISP
+
+Các router trên Internet tiếp tục chuyển tiếp gói tin
+
+Cuối cùng gói tin tới server của website
+
+Sơ đồ đơn giản:
+
+
+Máy tính
+   │
+   ▼
+Router nhà
+   │
+   ▼
+ISP router
+   │
+   ▼
+Router Internet
+   │
+   ▼
+Server website
+
+
+
+
+Mỗi router sẽ nhìn vào địa chỉ IP đích rồi quyết định:
+
+"Gửi gói tin này sang router nào để gần đích hơn?"
+
+Cơ chế này gọi là Internet Protocol routing.
+
+2️⃣ TCP Handshake – bắt tay kết nối 🤝
+
+Sau khi gói tin tới đúng server, máy tính cần thiết lập kết nối đáng tin cậy với server bằng Transmission Control Protocol.
+
+Quá trình này gọi là 3-way handshake.
+
+Bước 1 – SYN
+
+Máy tính nói:
+
+Xin chào server, tôi muốn kết nối
+Bước 2 – SYN-ACK
+
+Server trả lời:
+
+OK, tôi nhận được yêu cầu
+Bước 3 – ACK
+
+Máy tính xác nhận:
+
+Tốt, bắt đầu trao đổi dữ liệu
+
+Sơ đồ:
+
+Client → SYN → Server
+Client ← SYN-ACK ← Server
+Client → ACK → Server
+
+Sau bước này kết nối TCP được thiết lập.
+
+
+
+3️⃣ Sau đó mới gửi yêu cầu web
+
+Bây giờ trình duyệt mới gửi request:
+
+GET / HTTP/1.1
+Host: google.com
+
+Server gửi lại:
+
+HTML
+CSS
+JavaScript
+Images
+
+Trình duyệt dựng thành trang web.
+
+Tóm tắt toàn bộ quá trình truy cập website
+1. Nhập google.com
+2. DNS → tìm IP
+3. Routing → tìm đường đến server
+4. TCP handshake → thiết lập kết nối
+5. HTTP request → tải trang web
+
+💡 Một điều cực thú vị:
+
+Trang web HTTPS còn có thêm một bước nữa sau TCP handshake gọi là TLS handshake để mã hóa dữ liệu.
+
+Nếu bạn muốn, mình có thể vẽ sơ đồ toàn bộ 8 bước từ khi gõ URL đến khi trang web hiện ra (rất dễ hiểu nhưng ít người biết hết).
+
+
+
+
+Dưới đây là sơ đồ đầy đủ từ lúc bạn gõ URL đến khi trang web hiện ra. Mình lấy ví dụ bạn nhập https://google.com.
+
+Bạn gõ: https://google.com
+        │
+        ▼
+┌──────────────────────┐
+│ 1. Trình duyệt nhận  │
+│ URL người dùng nhập  │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 2. Kiểm tra DNS cache│
+│ trong máy tính       │
+└──────────────────────┘
+        │
+        │ (nếu chưa có IP)
+        ▼
+┌──────────────────────┐
+│ 3. Hỏi DNS server    │
+│ để tìm IP của domain │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 4. Nhận IP server    │
+│ ví dụ: 142.x.x.x     │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 5. Routing           │
+│ gói tin đi qua nhiều │
+│ router trên Internet │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 6. TCP Handshake     │
+│ thiết lập kết nối    │
+│ giữa client & server │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 7. TLS Handshake     │
+│ tạo kết nối mã hóa   │
+│ (HTTPS)              │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 8. HTTP Request      │
+│ trình duyệt yêu cầu  │
+│ nội dung trang web   │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 9. Server trả về     │
+│ HTML, CSS, JS, ảnh   │
+└──────────────────────┘
+        │
+        ▼
+┌──────────────────────┐
+│ 10. Trình duyệt      │
+│ render trang web     │
+│ → bạn nhìn thấy web  │
+└──────────────────────┘
+Tóm tắt cực ngắn 🚀
+Nhập URL
+   ↓
+DNS tìm IP
+   ↓
+Routing tới server
+   ↓
+TCP + TLS handshake
+   ↓
+HTTP request
+   ↓
+Server trả dữ liệu
+   ↓
+Browser hiển thị web
+
+💡 Một điều thú vị:
+Toàn bộ 10 bước này thường chỉ mất khoảng 100–500 ms (chưa đến 1 giây) cho nhiều website nhanh.
+
+Nếu bạn muốn, mình có thể vẽ thêm một sơ đồ cực trực quan (kiểu bản đồ Internet) để bạn hiểu luôn:
+
+Router hoạt động như thế nào
+
+Vì sao gói tin không đi theo 1 đường cố định trên Internet. 🌐
+Cái này là phần rất thú vị của networking.
+
+
+
+Mình vẽ một sơ đồ kiểu “bản đồ Internet” để bạn hình dung gói tin đi như thế nào từ máy bạn đến server website. 🌐
+
+          Internet (mạng lưới router)
+
+        ┌───────────┐
+        │ Router A  │
+        └─────┬─────┘
+              │
+      ┌───────┴────────┐
+      │                │
+ ┌────▼────┐      ┌────▼────┐
+ │Router B │      │Router C │
+ └────┬────┘      └────┬────┘
+      │                │
+      │          ┌─────▼─────┐
+      │          │ Router D  │
+      │          └─────┬─────┘
+      │                │
+      │          ┌─────▼─────┐
+      │          │ Web Server│
+      │          │ (Website) │
+      │          └───────────┘
+      │
+┌─────▼─────┐
+│ Router ISP│
+└─────┬─────┘
+      │
+┌─────▼─────┐
+│Router nhà │
+└─────┬─────┘
+      │
+┌─────▼─────┐
+│ Máy tính  │
+│ của bạn   │
+└───────────┘
+Điều quan trọng của Internet 🔑
+
+Internet không phải một đường thẳng.
+
+Gói tin có thể đi nhiều đường khác nhau:
+
+Máy bạn
+   │
+   ▼
+Router nhà
+   │
+   ▼
+ISP
+   │
+   ├── Router A → Router C → Server
+   │
+   └── Router B → Router D → Server
+
+Router sẽ chọn đường tốt nhất tại thời điểm đó dựa trên:
+
+tắc nghẽn mạng 🚦
+
+khoảng cách mạng
+
+bảng định tuyến
+
+Cơ chế này gọi là packet switching.
+
+Một điều rất thú vị 🤯
+
+Khi bạn tải một trang web:
+
+mỗi gói dữ liệu có thể đi đường khác nhau
+
+nhưng khi tới máy bạn chúng được ghép lại đúng thứ tự
+
+Ví dụ:
+
+Packet 1 → Router A → Router D
+Packet 2 → Router B → Router C
+Packet 3 → Router A → Router C
+
+Cuối cùng máy bạn vẫn ghép lại thành trang web hoàn chỉnh.
+
+💡 Một fact rất hay về Internet:
+
+Một trang web bạn mở ở Việt Nam có thể đi qua 10–20 router ở nhiều quốc gia trước khi tới server.
+
+Nếu bạn muốn, mình có thể vẽ thêm một sơ đồ cực dễ hiểu về:
+
+🧠 Bên trong router có gì mà nó biết phải gửi gói tin đi đâu?
+
+Đây là chỗ xuất hiện các giao thức rất nổi tiếng như:
+
+BGP
+
+OSPF
+
+routing table
+
+Hiểu phần này là gần như hiểu lõi của Internet luôn.
+
+
+
+
+Để hiểu router biết gửi gói tin đi đâu, bạn chỉ cần nắm 3 thứ cốt lõi:
+
+1️⃣ Routing table (bảng định tuyến)
+2️⃣ Router chọn đường tốt nhất
+3️⃣ Các router trao đổi thông tin với nhau bằng các giao thức routing
+
+1️⃣ Bên trong router có Routing Table 📋
+
+Mỗi router có một bảng định tuyến (routing table).
+
+Bảng này giống như bảng chỉ đường:
+
+Destination Network     Next Hop
+-------------------     --------
+192.168.1.0/24          local
+10.0.0.0/8              Router B
+0.0.0.0/0               ISP Router
+
+Ý nghĩa:
+
+Nếu gói tin đi tới 192.168.1.x → gửi trong mạng nội bộ
+
+Nếu đi tới 10.x.x.x → gửi qua Router B
+
+Nếu không biết → gửi ra ISP
+
+Quy trình router xử lý gói tin:
+
+Nhận packet
+     │
+     ▼
+Đọc IP đích
+     │
+     ▼
+Tra routing table
+     │
+     ▼
+Forward tới next hop
+2️⃣ Router chọn đường tốt nhất 🧭
+
+Internet có rất nhiều đường đi.
+
+Router phải chọn đường tốt nhất dựa trên các tiêu chí như:
+
+số router phải đi qua (hop count)
+
+độ trễ mạng
+
+băng thông
+
+chính sách mạng
+
+Ví dụ:
+
+Đường 1: 10 router
+Đường 2: 6 router
+
+Router sẽ chọn:
+
+Đường 2
+3️⃣ Router học đường đi bằng Routing Protocol 🔄
+
+Router không tự biết Internet.
+Chúng phải học từ router khác.
+
+Các router nói chuyện với nhau bằng các routing protocol.
+
+Trong nội bộ một mạng
+
+Ví dụ trong mạng của một công ty hoặc ISP.
+
+Các giao thức phổ biến:
+
+Open Shortest Path First
+
+Routing Information Protocol
+
+Chúng giúp router nói:
+
+Tôi biết đường tới mạng 10.0.0.0
+Giữa các mạng lớn trên Internet
+
+Internet gồm nhiều Autonomous System (AS)
+(mạng của Google, Cloudflare, ISP, v.v.).
+
+Để các mạng này nói chuyện với nhau, dùng:
+
+👉 Border Gateway Protocol
+
+BGP là giao thức quan trọng nhất của Internet.
+
+Ví dụ:
+
+Google network
+      │
+      │ BGP
+      ▼
+ISP network
+      │
+      │ BGP
+      ▼
+Cloudflare network
+
+Router trao đổi thông tin kiểu:
+
+Nếu muốn tới mạng của Google
+→ đi qua tôi
+Sơ đồ đơn giản toàn bộ
+Máy bạn
+   │
+   ▼
+Router nhà
+   │
+   ▼
+ISP Router
+   │
+   ▼
+Internet routers
+   │
+   ▼
+Server website
+
+Mỗi router:
+
+Nhận packet
+   ↓
+Xem IP đích
+   ↓
+Tra routing table
+   ↓
+Forward tiếp
+Một sự thật rất thú vị 🤯
+
+Internet không có trung tâm điều khiển.
+
+Toàn bộ Internet hoạt động vì:
+
+hàng triệu router
+
+trao đổi routing table
+
+qua BGP
+
+Nếu BGP sai, Internet có thể sập.
+
+Đã từng xảy ra nhiều lần, ví dụ sự cố của **Facebook năm 2021 khi BGP bị cấu hình sai làm toàn bộ dịch vụ của họ biến mất khỏi Internet.
+
+✅ Nếu bạn hiểu được 4 thứ này thì gần như đã hiểu 80% cách Internet hoạt động:
+
+DNS
+
+IP
+
+TCP
+
+Routing (BGP)
+
+Nếu bạn muốn, mình có thể vẽ thêm một sơ đồ cực trực quan về BGP và Autonomous System.
+
+Đây là thứ giúp bạn hiểu vì sao:
+
+Internet chia thành hàng chục nghìn mạng riêng
+
+nhưng vẫn kết nối được với nhau. 🌍
+
+
+
+
+Mình sẽ vẽ bản đồ Internet theo kiểu Autonomous System (AS) để bạn thấy Border Gateway Protocol hoạt động như thế nào. 🌍
+
+1️⃣ Internet thực chất là các mạng lớn nối với nhau
+
+Internet không phải một mạng duy nhất.
+Nó là hàng chục nghìn mạng riêng gọi là Autonomous System (AS).
+
+Ví dụ:
+
+mạng của Google
+
+mạng của Cloudflare
+
+mạng của Viettel
+
+mạng của FPT Telecom
+
+2️⃣ Sơ đồ Internet theo AS
+                 ┌───────────────┐
+                 │   Google AS   │
+                 │   (AS15169)   │
+                 └───────┬───────┘
+                         │
+                         │ BGP
+                         │
+                 ┌───────▼───────┐
+                 │   Cloudflare  │
+                 │   (AS13335)   │
+                 └───────┬───────┘
+                         │
+                         │ BGP
+                         │
+     ┌───────────────────▼───────────────────┐
+     │            Viettel ISP                │
+     │              (AS7552)                 │
+     └───────────────┬───────────────┬───────┘
+                     │               │
+                     │               │
+               ┌─────▼─────┐   ┌─────▼─────┐
+               │   Router  │   │   Router  │
+               └─────┬─────┘   └─────┬─────┘
+                     │               │
+                     └──────┬────────┘
+                            │
+                     ┌──────▼──────┐
+                     │  Router nhà │
+                     └──────┬──────┘
+                            │
+                       ┌────▼────┐
+                       │ Máy bạn │
+                       └─────────┘
+3️⃣ BGP hoạt động thế nào
+
+Các Autonomous System nói chuyện với nhau bằng Border Gateway Protocol.
+
+Ví dụ:
+
+Google AS → nói với Viettel:
+
+"Tôi có đường tới IP 8.8.8.8"
+Cloudflare → nói với Viettel:
+
+"Tôi có đường tới IP 1.1.1.1"
+
+ISP của bạn sẽ lưu thông tin này vào routing table.
+
+4️⃣ Khi bạn truy cập website
+
+Ví dụ bạn truy cập server của Google:
+
+Máy bạn
+   │
+   ▼
+Router nhà
+   │
+   ▼
+Viettel AS
+   │
+   ▼
+Google AS
+   │
+   ▼
+Google server
+
+Mỗi bước đi qua một Autonomous System khác nhau.
+
+5️⃣ Internet thực sự trông như thế này
+
+Thay vì một đường thẳng, nó giống mạng nhện khổng lồ:
+
+         Google AS
+           /   \
+          /     \
+ Cloudflare AS  Amazon AS
+        \        /
+         \      /
+          ISP AS
+           /  \
+          /    \
+      Home   Mobile
+
+Các AS kết nối chéo với nhau để:
+
+tăng tốc độ
+
+dự phòng khi mạng lỗi
+
+giảm chi phí
+
+🤯 Một fact rất thú vị
+
+Hiện nay Internet có khoảng:
+
+> 75,000 Autonomous Systems
+
+Tất cả được kết nối nhờ Border Gateway Protocol.
+
+Chỉ cần một cấu hình sai trong BGP, hàng triệu website có thể biến mất khỏi Internet.
+
+Điều này đã từng xảy ra với Facebook năm 2021 khiến Facebook, Instagram và WhatsApp sập toàn cầu.
+
+✅ Nếu bạn hiểu đến đây, bạn đã nắm gần như xương sống của Internet:
+
+DNS → tìm IP
+IP → định danh máy
+Routing → tìm đường
+BGP → nối các mạng lớn
+TCP → truyền dữ liệu
+
+Nếu bạn muốn, mình có thể vẽ thêm một sơ đồ cực kỳ thực tế:
+
+🧠 Khi bạn ở Hà Nội mở Google thì gói tin thật sự đi qua những quốc gia nào trước khi tới server.
+
+Sơ đồ này sẽ giúp bạn hiểu luôn cáp quang biển và backbone Internet hoạt động ra sao.
+
+
+
+
+Mình vẽ một sơ đồ gần giống đường đi thật khi bạn ở Hà Nội truy cập server của Google. 🌏
+(Đường đi thực tế có thể thay đổi tùy ISP và thời điểm.)
+
+Bản đồ đường đi của gói tin
+            Internet Backbone
+
+      ┌──────────────────────────┐
+      │   Google Data Center     │
+      │      Singapore           │
+      └─────────────▲────────────┘
+                    │
+                    │ Backbone
+                    │
+           ┌────────┴─────────┐
+           │  International   │
+           │   Internet Hub   │
+           │     Singapore    │
+           └────────▲─────────┘
+                    │
+                    │ Submarine Cable
+                    │
+          ┌─────────┴─────────┐
+          │ Vietnam ISP Core  │
+          │ (ví dụ Viettel)   │
+          └─────────▲─────────┘
+                    │
+              ┌─────┴─────┐
+              │  ISP Edge  │
+              │   Hà Nội   │
+              └─────▲─────┘
+                    │
+               ┌────┴────┐
+               │ Router  │
+               │  nhà bạn│
+               └────▲────┘
+                    │
+               ┌────┴────┐
+               │ Máy bạn │
+               └─────────┘
+Các bước gói tin di chuyển
+1️⃣ Máy bạn gửi request
+Máy bạn
+↓
+Router nhà
+2️⃣ Đi vào mạng ISP
+
+Ví dụ mạng của Viettel hoặc FPT Telecom
+
+Router nhà
+↓
+ISP router Hà Nội
+↓
+ISP core network
+3️⃣ Đi qua cáp quang biển 🌊
+
+Việt Nam kết nối quốc tế bằng submarine cable.
+
+Ví dụ:
+
+Asia-America Gateway
+
+Asia Pacific Gateway
+
+Việt Nam
+   ↓
+Cáp quang biển
+   ↓
+Singapore Internet Hub
+4️⃣ Vào backbone Internet
+
+Từ hub quốc tế, gói tin đi qua Internet backbone tới mạng của Google.
+
+Singapore IX
+↓
+Google network
+↓
+Google server
+Tổng đường đi (đơn giản)
+Máy bạn
+↓
+Router nhà
+↓
+ISP Việt Nam
+↓
+Cáp quang biển
+↓
+Internet Hub (Singapore)
+↓
+Google network
+↓
+Google server
+🤯 Một điều rất thú vị
+
+Khi bạn mở một trang web lớn như:
+
+Google
+
+Facebook
+
+Netflix
+
+thì server thường không ở Mỹ.
+
+Họ đặt data center gần Việt Nam (Singapore, Hong Kong, Tokyo) để:
+
+giảm latency
+
+tăng tốc độ tải web
+
+Ví dụ:
+
+Hà Nội → Singapore
+≈ 30–50 ms
+
+💡 Nếu bạn muốn, mình có thể vẽ thêm một sơ đồ rất “hack não” nhưng cực hay:
+
+🧠 Khi bạn mở 1 trang web, thực ra trình duyệt không chỉ kết nối 1 server mà có thể kết nối 20–50 server khác nhau cùng lúc.
+
+Đây là lý do DevTools Network tab nhìn như một mạng nhện.
