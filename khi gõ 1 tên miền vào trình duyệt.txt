@@ -1,0 +1,141 @@
+Đây là sơ đồ đơn giản quá trình khi bạn nhập một tên miền (ví dụ google.com) vào trình duyệt:
+
+
+
+Bạn nhập: google.com
+        │
+        ▼
+┌─────────────────┐
+│ 1. Máy tính     │
+│ kiểm tra cache  │
+│ & file hosts    │
+└─────────────────┘
+        │
+        │ (không có IP)
+        ▼
+┌─────────────────┐
+│ 2. Hỏi DNS      │
+│ server          │
+│ (thường là router│
+│ hoặc 8.8.8.8)   │
+└─────────────────┘
+        │
+        ▼
+┌─────────────────┐
+│ 3. DNS server   │
+│ hỏi hệ DNS      │
+│ trên Internet   │
+└─────────────────┘
+        │
+        ▼
+Root DNS
+   │
+   ▼
+TLD (.com)
+   │
+   ▼
+Authoritative DNS
+   │
+   ▼
+Trả về IP: 142.xxx.xxx.xxx
+        │
+        ▼
+┌─────────────────┐
+│ 4. DNS server   │
+│ trả IP về       │
+│ máy tính        │
+└─────────────────┘
+        │
+        ▼
+┌─────────────────┐
+│ 5. Máy tính     │
+│ kết nối tới     │
+│ IP của website  │
+└─────────────────┘
+
+
+
+📌 Ý chính:
+DNS giống như danh bạ điện thoại của Internet
+
+Bạn nhớ tên (google.com)
+
+DNS tra ra số điện thoại (IP).
+
+
+
+Nếu bạn muốn, mình có thể giải thích thêm một cái rất hay nhưng ít người biết:
+👉 Tại sao lần truy cập website thứ 2 lại nhanh hơn lần đầu (liên quan DNS cache).
+
+Lần truy cập website thứ 2 thường nhanh hơn vì DNS cache đã lưu sẵn địa chỉ IP của website. Khi đó máy tính không cần đi hỏi lại hệ thống DNS trên Internet nữa. 🚀
+
+Quá trình lần truy cập đầu tiên
+
+Ví dụ bạn vào google.com lần đầu:
+
+1️⃣ Máy tính không biết IP của google.com
+2️⃣ Nó phải hỏi DNS server (có thể qua router)
+3️⃣ DNS server đi hỏi nhiều nơi trong hệ DNS
+4️⃣ Cuối cùng mới tìm được IP (ví dụ 142.x.x.x)
+5️⃣ Máy tính lưu IP này vào DNS cache
+
+Quá trình này mất thêm vài bước nên tốn thêm thời gian.
+
+
+google.com
+   ↓
+Máy tính hỏi DNS
+   ↓
+DNS đi hỏi nhiều server
+   ↓
+Tìm được IP
+   ↓
+Truy cập website
+
+
+
+Quá trình lần truy cập thứ 2
+
+Khi bạn truy cập lại ngay sau đó:
+
+1️⃣ Máy tính kiểm tra DNS cache
+2️⃣ Thấy đã có IP của google.com
+3️⃣ Dùng luôn IP đó để kết nối
+
+Không cần hỏi DNS nữa → nhanh hơn ⚡
+
+
+google.com
+   ↓
+Máy tính kiểm tra DNS cache
+   ↓
+Đã có IP
+   ↓
+Kết nối ngay
+
+
+DNS cache tồn tại bao lâu?
+
+IP trong cache không lưu mãi, nó có thời gian gọi là TTL (Time To Live).
+
+TTL hết → máy phải hỏi DNS lại.
+
+TTL có thể:
+
+vài phút
+
+vài giờ
+
+đôi khi 1 ngày
+
+
+
+💡 Điều thú vị: DNS cache không chỉ có ở máy bạn. Nó tồn tại ở nhiều tầng:
+
+máy tính của bạn
+
+router
+
+DNS server của ISP
+
+Càng nhiều tầng cache → website mở càng nhanh.
