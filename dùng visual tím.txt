@@ -1,0 +1,8 @@
+đóng code
+ctrl + M
+ctrl + O
+
+
+mở code
+ctrl + M
+ctrl + L
