@@ -1,0 +1,118 @@
+using System;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.InputEncoding = Encoding.UTF8;
+        Console.OutputEncoding = Encoding.UTF8;
+
+
+        #region code cũ
+        //string input = "Từ ngày";
+        //string escaped = ToUnicodeEscape(input);
+        //Console.WriteLine("Original: " + input);
+        //Console.WriteLine("Escaped: " + escaped);
+        //Console.WriteLine(escaped == @"T\1EEB ng\00E0y");
+
+
+        //Console.WriteLine("\n");
+
+
+        //string input2 = "Đến ngày";
+        //string escaped2 = ToUnicodeEscape(input2);
+        //Console.WriteLine("Original: " + input2);
+        //Console.WriteLine("Escaped: " + escaped2);
+        //Console.WriteLine(escaped2 == @"\0110\1EBFn ng\00E0y");
+
+
+        //Console.WriteLine("\n");
+
+
+        //string input3 = "Từ tháng";
+        //string escaped3 = ToUnicodeEscape(input3);
+        //Console.WriteLine("Original: " + input3);
+        //Console.WriteLine("Escaped: " + escaped3);
+
+
+        //Console.WriteLine("\n");
+
+
+        string input4 = "Đến tháng";
+        string escaped4 = ToUnicodeEscape(input4);
+        Console.WriteLine("Original: " + input4);
+        Console.WriteLine("Escaped: " + escaped4);
+
+        string decoded4 = FromUnicodeEscape(@"kh\u00F4ng ghi plaintext m\u1EADt kh\u1EA9u");
+        Console.WriteLine("Decoded: " + decoded4);
+        #endregion
+
+
+    }
+
+    static string ToUnicodeEscape(string input)
+    {
+        StringBuilder sb = new StringBuilder();
+        foreach (char c in input)
+        {
+            if (c > 127) // only escape non-ASCII characters
+            {
+                sb.AppendFormat("\\{0:X4}", (int)c);
+            }
+            else
+            {
+                sb.Append(c);
+            }
+        }
+        return sb.ToString();
+    }
+
+    static string FromUnicodeEscape(string input)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (input[i] == '\\' && i + 5 < input.Length && input[i + 1] == 'u' && IsHex(input, i + 2, 4))
+            {
+                string hex = input.Substring(i + 2, 4);
+                int code = Convert.ToInt32(hex, 16);
+                sb.Append((char)code);
+                i += 5;
+            }
+            else if (input[i] == '\\' && i + 4 < input.Length && IsHex(input, i + 1, 4))
+            {
+                string hex = input.Substring(i + 1, 4);
+                int code = Convert.ToInt32(hex, 16);
+                sb.Append((char)code);
+                i += 4;
+            }
+            else
+            {
+                sb.Append(input[i]);
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    static bool IsHex(string input, int startIndex, int length)
+    {
+        for (int i = startIndex; i < startIndex + length; i++)
+        {
+            char c = input[i];
+            bool isHex =
+                (c >= '0' && c <= '9') ||
+                (c >= 'A' && c <= 'F') ||
+                (c >= 'a' && c <= 'f');
+
+            if (!isHex)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
