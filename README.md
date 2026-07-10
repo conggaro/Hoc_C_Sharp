@@ -1,6 +1,188 @@
 # Tinh túy
 Khi không biết câu lệnh này là gì, thì phải hỏi câu lệnh này trả về giá trị gì, thì đấy là tác dụng của câu lệnh
 
+# bật long path git trên window
+<pre># Hướng dẫn bật Long Path trên Windows (cho Commit Sync PVN ↔ TVC)
+
+Tài liệu này dùng khi sync commit **Web App** gặp lỗi path file quá dài, ví dụ:
+
+```
+fatal: ... Filename too long
+```
+
+hoặc app báo:
+
+```
+Không có file nào được apply (tất cả bị exclude hoặc rỗng).
+```
+
+Thường gặp với file CMS path sâu, ví dụ màn **profile / additional-info-edit**.
+
+---
+
+## Tóm tắt nhanh
+
+| Bước | Việc cần làm | Quyền |
+|------|----------------|-------|
+| 1 | Bật `LongPathsEnabled` trong Registry Windows | **Administrator** |
+| 2 | **Khởi động lại máy** | — |
+| 3 | `git config core.longpaths true` (global + từng repo) | User thường |
+| 4 | Mở lại **Commit Sync** (bản mới) và sync lại | — |
+
+---
+
+## 1. Bật Long Path trên Windows (Registry)
+
+Mở **PowerShell** hoặc **CMD** → chuột phải → **Run as administrator**, chạy:
+
+```powershell
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f
+```
+
+### Kiểm tra đã bật chưa
+
+```powershell
+reg query "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled
+```
+
+Kết quả mong đợi:
+
+```
+LongPathsEnabled    REG_DWORD    0x1
+```
+
+### Khởi động lại máy
+
+Sau khi sửa registry, **nên restart Windows** để hệ điều hành áp dụng đầy đủ.
+
+---
+
+## 2. Bật Long Path qua Group Policy (cách GUI, tùy chọn)
+
+Dùng được trên Windows **Pro / Enterprise** (có `gpedit.msc`):
+
+1. `Win + R` → gõ `gpedit.msc` → Enter  
+2. Đi tới: **Computer Configuration** → **Administrative Templates** → **System** → **Filesystem**  
+3. Mở **Enable Win32 long paths** → chọn **Enabled** → OK  
+4. **Khởi động lại máy**
+
+---
+
+## 3. Bật Long Path cho Git
+
+### Global (áp dụng mọi repo trên máy)
+
+```powershell
+git config --global core.longpaths true
+```
+
+Kiểm tra:
+
+```powershell
+git config --global --get core.longpaths
+```
+
+Kỳ vọng: `true`
+
+### Local — từng repo dùng trong Commit Sync
+
+Thay path nếu máy bạn khác (xem `appsettings.json` của app):
+
+```powershell
+git -C "C:\Users\CongNC\Videos\alphafrontendworkspace" config core.longpaths true
+git -C "C:\Users\CongNC\Videos\DuAn_PVN\BE\pvn-fed-appdomain" config core.longpaths true
+git -C "C:\Users\CongNC\Videos\DuAn_TVC_Angular\BE\tvc-fed-appdomain" config core.longpaths true
+```
+
+Kiểm tra một repo:
+
+```powershell
+git -C "C:\Users\CongNC\Videos\alphafrontendworkspace" config --get core.longpaths
+```
+
+---
+
+## 4. Commit Sync tự bật khi mở app (bản mới)
+
+App **Commit Sync** (WinForms) đã có logic tự động khi khởi động:
+
+- Thử bật registry `LongPathsEnabled` (nếu chạy Admin hoặc chấp nhận UAC một lần)
+- `git config --global core.longpaths true`
+- `git config core.longpaths true` trên các repo trong `appsettings.json`
+- Manifest app: `longPathAware=true`
+- Mọi lệnh git trong app: `-c core.longpaths=true`
+
+Log kiểm tra sau khi mở app:
+
+```
+DongBo_PVN_to_TVC\data\local\app.log
+```
+
+Tìm dòng `[LongPath]`, ví dụ:
+
+```
+Windows long path: đã bật; git global core.longpaths=true; git local core.longpaths: 3 repo
+```
+
+### Nếu lần trước từ chối UAC — muốn app hỏi lại
+
+Xóa file marker rồi mở lại app:
+
+```
+DongBo_PVN_to_TVC\data\local\.longpath-uac-attempted
+```
+
+---
+
+## 5. Test sau khi reboot
+
+Thử đọc file path dài từ git (ví dụ commit PVN 992):
+
+```powershell
+git -C "C:\Users\CongNC\Videos\alphafrontendworkspace" -c core.longpaths=true show d9d3af4e:"projects/pvn/src/app/main/cms/profile/appbusiness/staffprofile/personnel-center/personnel-profile/profile-info/additional-info/additional-info-edit/additional-info-edit.component.ts" | Select-Object -First 5
+```
+
+- **Thành công:** hiện nội dung TypeScript, không báo `Filename too long`  
+- **Thất bại:** kiểm tra lại bước 1–3 và **đã reboot chưa**
+
+---
+
+## 6. Lỗi sync khác (không phải long path)
+
+### Repo đích có thay đổi chưa commit
+
+```powershell
+git -C "C:\Users\CongNC\Videos\alphafrontendworkspace" status
+```
+
+Commit hoặc stash file đang sửa trước khi sync.
+
+### File đã giống nguồn (skip, không tạo commit)
+
+App coi commit đã đồng bộ — không cần làm gì thêm.
+
+---
+
+## 7. Checklist trước khi sync Web App PVN → TVC
+
+- [ ] `LongPathsEnabled = 1` (registry)  
+- [ ] Đã khởi động lại máy sau khi sửa registry  
+- [ ] `git config --global core.longpaths` = `true`  
+- [ ] Repo `alphafrontendworkspace` sạch (`git status` không có file M/??)  
+- [ ] Đã build và chạy bản Commit Sync mới nhất  
+
+---
+
+## Tham chiếu
+
+- App: `C:\Users\CongNC\Videos\DongBo_PVN_to_TVC`  
+- Config: `CommitSync.Desktop\appsettings.json`  
+- Log lỗi sync: `data\local\sync-errors.log`  
+- Log app: `data\local\app.log`  
+
+*Tạo: 10/07/2026 — Commit Sync PVN ↔ TVC*
+</pre>
+
 # Tạo service Kestrel
 nssm install AlphaKestrel
 
